@@ -46,5 +46,5 @@ Adicionales para Aprobación
 |:-|:-|
 |Listados |1. Listado de torneos filtrado por estado y tipo, muestra nombre, complejo, fecha de inicio y fecha de fin ⇒ detalle muestra datos completos del torneo, equipos inscriptos y fechas. <br>2. Listado de equipos filtrado por torneo, muestra nombre del equipo, cantidad de jugadores y rango ⇒ detalle muestra integrantes del equipo y partidos jugados en el torneo.<br>3. Listado de equipos ordenado por puntaje dentro de un torneo, filtrado por torneo y fecha, muestra nombre del equipo, partidos ganados, perdidos y puntos ⇒ detalle muestra el historial de partidos del equipo en ese torneo.|
 |CUU/Epic|1. Cancelación de reserva|
-|Otros|1. Envío de recordatorio de reserva por email<br>2.Notificacion cuando se encuentre un partido por email<br>|
+|Otros|1. Envío de recordatorio de reserva por email<br>2. Notificacion cuando se encuentre un partido por email<br>|
 
