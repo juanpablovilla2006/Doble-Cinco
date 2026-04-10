@@ -29,9 +29,9 @@
 Regularidad:
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Tipo Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo|
+|CRUD simple|1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo|
 |CRUD dependiente|1. CRUD Reserva {depende de} CRUD Cancha<br>2. CRUD Torneo {depende de} CRUD Complejo y CRUD Equipo|
-|Listado<br>+<br>detalle| 1. Listado de canchas filtrado por tipo y disponibilidad, muestra nombre del complejo, tipo y precio ⇒ detalle CRUD Cancha<br> 2.Listado de reservas filtrado por estado y fecha, muestra cancha, horario y estado de pago, nombre del usuario que reservo ⇒ detalle muestra datos completos de la reserva y usaurio|
+|Listado<br>+<br>detalle| 1. Listado de canchas filtrado por tipo y disponibilidad, muestra nombre del complejo, tipo y precio ⇒ detalle CRUD Cancha<br> 2.Listado de reservas filtrado por estado y fecha, muestra cancha, horario y estado de pago, nombre del usuario que reservo ⇒ detalle muestra datos completos de la reserva y usuario|
 |CUU/Epic|1. Reservar cancha para un partido<br>2. Encontrar un partido con falta de jugadores|
 
 
