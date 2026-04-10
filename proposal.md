@@ -15,7 +15,7 @@
 *Doble Cinco es una aplicación para la gestión de un complejo de fútbol que permite a los usuarios reservar canchas. Además, proporciona la búsqueda de partidos, conectando jugadores sin equipo con otros usuarios o equipos completos. La plataforma ofrece herramientas para la creación y organización de torneos.*
 
 ### Modelo
-![imagen del modelo](./MODELODDSF.jpg)
+![imagen del modelo](./MODELODDSF.png)
 
 
 ## Alcance Funcional 
