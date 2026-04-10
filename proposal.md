@@ -35,7 +35,7 @@ Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
 |CRUD |1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo<br>4. CRUD Cancha<br>5. CRUD Reserva<br>6. CRUD Partido<br>7. CRUD Torneo<br>8. CRUD Fecha<br>9. CRUD Notificacion|
-|CUU/Epic|1. Reservar cancha para un partido<br>2. Encontrar un partido con falta de jugadores<br>3. Crear un torneo<br>4.Inscribir equipos a torneo<br>5. Registrar resultado de los partidos|
+|CUU/Epic|1. Reservar cancha para un partido<br>2. Encontrar un partido con falta de jugadores<br>3. Crear un torneo<br>4. Inscribir equipos a torneo<br>5. Registrar resultado de los partidos|
 
 
 ### Alcance Adicional Voluntario
