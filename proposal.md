@@ -29,7 +29,7 @@
 Regularidad:
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo|
+|CRUD simple|1. CRUD Usuario<br>2. CRUD Cancha<br>3. CRUD Equipo|
 |CRUD dependiente|1. CRUD Reserva {depende de} CRUD Cancha<br>2. CRUD Torneo {depende de} CRUD Complejo y CRUD Equipo|
 |Listado<br>+<br>detalle| 1. Listado de canchas filtrado por tipo y disponibilidad, muestra nombre del complejo, tipo y precio ⇒ detalle CRUD Cancha<br> 2.Listado de reservas filtrado por estado y fecha, muestra cancha, horario y estado de pago, nombre del usuario que reservo ⇒ detalle muestra datos completos de la reserva y usuario|
 |CUU/Epic|1. Reservar cancha para un partido<br>2. Encontrar un partido con falta de jugadores|
@@ -38,7 +38,7 @@ Regularidad:
 Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Tipo Habitacion<br>2. CRUD Servicio<br>3. CRUD Localidad<br>4. CRUD Provincia<br>5. CRUD Habitación<br>6. CRUD Empleado<br>7. CRUD Cliente|
+|CRUD |1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo<br>4. CRUD Cancha<br>5. CRUD Reserva<br>6. CRUD Partido<br>7. CRUD Torneo<br>8. CRUD Fecha<br>9. CRUD Notificacion|
 |CUU/Epic|1. Reservar una habitación para la estadía<br>2. Realizar el check-in de una reserva<br>3. Realizar el check-out y facturación de estadía y servicios|
 
 
