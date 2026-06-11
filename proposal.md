@@ -3,7 +3,6 @@
 ## Grupo
 ### Integrantes
 * 54326 Doino, Roque
-* 54327 Gallina, Santino Lucio
 * 54689 Villa, Juan Pablo
 
 ### Repositorios
