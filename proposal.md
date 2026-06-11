@@ -44,6 +44,6 @@ Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
 |Listados |1. Listado de usuarios del equipo de matchmaking, muestra nombre, id y descripción por usuario|
-|CUU/Epic|1. Cancelación de reserva|
+|CUU/Epic|1. Cancelación de reserva <br> 2. Moderación del chat|
 |Otros|1. Envío de recordatorio de reserva por email<br>2. Notificacion cuando se encuentre un partido por email<br>|
 
