@@ -27,14 +27,14 @@ Regularidad:
 |CRUD simple|1. CRUD Usuario<br>2. CRUD Complejo<br>|
 |CRUD dependiente|1. CRUD Cancha {depende de} CRUD Complejo<br>|
 |Listado<br>+<br>detalle| 1. Listado de canchas filtrado por tipo y disponibilidad, muestra nombre del complejo, tipo y precio ⇒ detalle CRUD Cancha<br>|
-|CUU/Epic|1. Reservar cancha para un partido<br>|
+|CUU/Epic|1. Generar Reserva de Cancha para un partido<br>|
 
 
 Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo<br>4. CRUD Cancha<br> 5. CRUD Complejo<br>|
-|CUU/Epic|1. Reservar cancha para un partido<br>2. Completar el equipo de una reserva de matchmaking<br>|
+|CRUD |1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Cancha<br>4. CRUD Notificacion<br>|
+|CUU/Epic|1. Generar Reserva de Cancha para un partido<br>2. Completar el equipo de una reserva de matchmaking<br>|
 
 
 ### Alcance Adicional Voluntario
@@ -43,7 +43,7 @@ Adicionales para Aprobación
 
 |Req|Detalle|
 |:-|:-|
-|Listados |1. Listado de usuarios del equipo de matchmaking, muestra nombre, id y descripción por usuario|
+|Listados |1.Listado de partidos disponibles, muestra reservas tipo "matchmaking" que aun tiene "estadoReserva" "no completo", muestra horario, dia, tipo de cancha y precio. <br>2.Listado de usuarios del equipo de matchmaking, muestra nombre, id y descripción por usuario|
 |CUU/Epic|1. Cancelación de reserva <br> 2. Moderación del chat|
 |Otros|1. Envío de recordatorio de reserva por email<br>2. Notificacion cuando se encuentre un partido por email<br>|
 
