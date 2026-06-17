@@ -24,8 +24,8 @@
 Regularidad:
 |Req|Detalle|
 |:-|:-|
-|CRUD simple|1. CRUD Usuario<br>2. CRUD Reserva<br>|
-|CRUD dependiente|1. CRUD Equipo {depende de} CRUD Reserva<br>|
+|CRUD simple|1. CRUD Usuario<br>2. CRUD Complejo<br>|
+|CRUD dependiente|1. CRUD Cancha {depende de} CRUD Complejo<br>|
 |Listado<br>+<br>detalle| 1. Listado de canchas filtrado por tipo y disponibilidad, muestra nombre del complejo, tipo y precio ⇒ detalle CRUD Cancha<br>|
 |CUU/Epic|1. Reservar cancha para un partido<br>|
 
@@ -33,8 +33,8 @@ Regularidad:
 Adicionales para Aprobación
 |Req|Detalle|
 |:-|:-|
-|CRUD |1. CRUD Usuario<br>2. CRUD Reserva<br>3. CRUD Equipo<br>4. CRUD Cancha<br> 5. CRUD Complejo<br>|
-|CUU/Epic|1. Reservar cancha para un partido<br>2. Encontrar un partido con falta de jugadores<br>|
+|CRUD |1. CRUD Usuario<br>2. CRUD Complejo<br>3. CRUD Equipo<br>4. CRUD Cancha<br> 5. CRUD Complejo<br>|
+|CUU/Epic|1. Reservar cancha para un partido<br>2. Completar el equipo de una reserva de matchmaking<br>|
 
 
 ### Alcance Adicional Voluntario
