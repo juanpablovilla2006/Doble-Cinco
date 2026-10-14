@@ -8,45 +8,12 @@
     content="Esta página trata de gestión de un complejo de fútbol, permite reservar canchas, buscar partidos y organizar equipos">
   <link rel="icon" href="../IMAGENES/LOGO PÁGINA.png" type="image/png">
   <link rel="stylesheet" href="../CSS/index.css">
-  <script src="../JS/index.js" defer></script>
-  <title>Inicio</title>
+  <script type="module" src="../src/main.jsx"></script>
+  <title>Reservar</title>
 </head>
 
 <body>
-  <div class="barraMenu">
-
-    <div class="first_rectangulo_desplegable">
-      <button class="boton_barras_menu" id="boton_menu" type="button" aria-label="Abrir menú" aria-expanded="false"
-        aria-controls="menu_desplegable">
-        <img src="../IMAGENES/barrita_menu.png" alt="">
-      </button>
-      <nav class="menu_desplegable" id="menu_desplegable" hidden>
-        <a href="index.html">Inicio</a>
-        <a href="cuenta.html">Cuenta</a>
-        <a href="canchas.html">Canchas</a>
-        <a href="reservar.html">Reservar</a>
-        <a href="misReservas.html">Mis Reservas</a>
-      </nav>
-    </div>
-
-
-    <div class="rectangulo_titulo">
-      <h1>RESERVAR CANCHA</h1>
-    </div>
-
-
-    <div class="botones_interactuables">
-      <div class="second_rectangulo_desplegable">
-        <img src="../IMAGENES/bell_logo.png" alt="Icono para acceder a notificaciones">
-      </div>
-
-      <div class="third_rectangulo_desplegable">
-        <a href="cuenta.html">
-          <img src="../IMAGENES/account_logo.png" alt="Icono para ir a mi cuenta">
-        </a>
-      </div>
-    </div>
-  </div>
+ <div id="root" data-titulo="RESERVAR CANCHA"></div>
 </body>
 
 </html>
