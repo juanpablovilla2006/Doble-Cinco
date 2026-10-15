@@ -1,0 +1,10 @@
+POST http://localhost:3000/canchas
+Content-Type: application/json
+
+{
+  "numero": 2,
+  "tipo": "Fútbol 7",
+  "capacidad": 14,
+  "precio": 45000,
+  "habilitada": true
+}
