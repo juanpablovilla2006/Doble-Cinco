@@ -1,5 +1,7 @@
 Reglas de negocio:
+
 Usuarios y reservas
+
 1. Cada reserva debe tener un único usuario creador. Un usuario puede crear cero o muchas reservas.
 
 2. El creador también debe formar parte de los participantes de su reserva.
@@ -25,6 +27,7 @@ Usuarios y reservas
 12. La visibilidad de una reserva puede ser pública o privada. Las reservas públicas aparecen en el listado general. Las privadas no aparecen en ese listado y pueden compartirse mediante un enlace de invitación. Quien acceda mediante el enlace debe iniciar sesión para solicitar unirse. Su incorporación requiere la aceptación del creador.
 
 Solicitudes para unirse
+
 13. Cada solicitud debe corresponder a un único usuario solicitante y a una única reserva. Un usuario puede realizar muchas solicitudes y una reserva puede recibir muchas.
 
 14. Cada solicitud debe registrar un identificador, una fecha de creación y un estado: pendiente, aceptada o rechazada.
@@ -38,6 +41,7 @@ Solicitudes para unirse
 18. Solo pueden aceptarse solicitudes pendientes para reservas que todavía no comenzaron, no están canceladas y tienen lugar disponible. El cupo debe comprobarse al aceptar, aunque hubiera lugar cuando se presentó la solicitud.
 
 Equipos
+
 19. Una reserva puede tener entre cero y dos equipos. Cada equipo pertenece a una única reserva.
 
 20. Un usuario puede integrar equipos de distintas reservas, pero solo puede integrar un equipo dentro de una misma reserva.
@@ -47,6 +51,7 @@ Equipos
 22. La cantidad de usuarios de un equipo se calcula a partir de sus integrantes.
 
 Chats y mensajes
+
 23. Cada reserva tiene un único chat y cada chat pertenece exclusivamente a una reserva. El chat depende de esa reserva y se identifica mediante ella.
 
 24. Solo los participantes de una reserva pueden acceder a su chat y enviar mensajes.
@@ -54,9 +59,11 @@ Chats y mensajes
 25. Cada mensaje pertenece a un único chat y tiene un único autor. Debe registrar un identificador, contenido y fecha de envío. El contenido puede repetirse entre mensajes.
 
 Notificaciones
+
 26. Cada notificación corresponde a una única reserva y se envía únicamente al creador de esa reserva. Una reserva y un usuario pueden tener cero o muchas notificaciones.
 
 27. Cada nueva solicitud para unirse genera una notificación para el creador. Otros motivos de notificación quedan por definir.
 
 Datos derivados
+
 28. La edad del usuario se calcula a partir de su fecha de nacimiento; la duración de la reserva, a partir de su inicio y finalización. Estos valores deben mantenerse coherentes con los datos de origen.
