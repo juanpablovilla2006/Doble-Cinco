@@ -10,7 +10,9 @@ export const usuario = mysqlTable("usuario", {
   fecha_nac: date("fecha_nac", { mode: "string" }).notNull(),
   genero: varchar("genero", { length: 10 }).notNull(),
   descripcion: varchar("descripcion", { length: 200 }).notNull(),
-  telefono: varchar("telefono", { length: 15 }).notNull()
+  telefono: varchar("telefono", { length: 15 }).notNull(),
+  rol: mysqlEnum("rol", ["admin", "user"]).notNull().default("user"),
+  password: varchar("password", { length: 100 }).notNull()
 });
 
 export const cancha = mysqlTable("cancha", {
