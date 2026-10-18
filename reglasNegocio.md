@@ -26,44 +26,18 @@ Usuarios y reservas
 
 12. La visibilidad de una reserva puede ser pública o privada. Las reservas públicas aparecen en el listado general. Las privadas no aparecen en ese listado y pueden compartirse mediante un enlace de invitación. Quien acceda mediante el enlace debe iniciar sesión para solicitar unirse. Su incorporación requiere la aceptación del creador.
 
+13. Cada usuario debe tener una contraseña (password) para iniciar sesión junto con su correo electrónico. La contraseña debe almacenarse mediante un hash, nunca como texto plano.
+
+14. Cada usuario debe tener un rol, cuyos valores permitidos son admin y user.
+
+15. Todo usuario registrado recibe el rol user de forma predeterminada y no puede asignarse a sí mismo el rol admin.
+
+16. Solo los usuarios con rol admin pueden crear, modificar o eliminar canchas. Los usuarios con rol user pueden consultarlas y realizar reservas.
+
 Solicitudes para unirse
 
-13. Cada solicitud debe corresponder a un único usuario solicitante y a una única reserva. Un usuario puede realizar muchas solicitudes y una reserva puede recibir muchas.
+17. Cada solicitud debe corresponder a un único usuario solicitante y a una única reserva. Un usuario puede realizar muchas solicitudes y una reserva puede recibir muchas.
 
-14. Cada solicitud debe registrar un identificador, una fecha de creación y un estado: pendiente, aceptada o rechazada.
+18. Cada solicitud debe registrar un identificador, una fecha de creación y un estado: pendiente, aceptada o rechazada.
 
-15. Un usuario no puede solicitar unirse si ya participa en esa reserva, ni tener más de una solicitud pendiente para la misma reserva.
-
-16. Solo el creador de la reserva puede aceptar o rechazar las solicitudes dirigidas a ella.
-
-17. Al aceptar una solicitud, el usuario solicitante se incorpora a los participantes y la solicitud pasa a estado aceptada. Al rechazarla, no se incorpora y la solicitud pasa a estado rechazada.
-
-18. Solo pueden aceptarse solicitudes pendientes para reservas que todavía no comenzaron, no están canceladas y tienen lugar disponible. El cupo debe comprobarse al aceptar, aunque hubiera lugar cuando se presentó la solicitud.
-
-Equipos
-
-19. Una reserva puede tener entre cero y dos equipos. Cada equipo pertenece a una única reserva.
-
-20. Un usuario puede integrar equipos de distintas reservas, pero solo puede integrar un equipo dentro de una misma reserva.
-
-21. Para integrar un equipo, el usuario debe ser participante de la reserva correspondiente.
-
-22. La cantidad de usuarios de un equipo se calcula a partir de sus integrantes.
-
-Chats y mensajes
-
-23. Cada reserva tiene un único chat y cada chat pertenece exclusivamente a una reserva. El chat depende de esa reserva y se identifica mediante ella.
-
-24. Solo los participantes de una reserva pueden acceder a su chat y enviar mensajes.
-
-25. Cada mensaje pertenece a un único chat y tiene un único autor. Debe registrar un identificador, contenido y fecha de envío. El contenido puede repetirse entre mensajes.
-
-Notificaciones
-
-26. Cada notificación corresponde a una única reserva y se envía únicamente al creador de esa reserva. Una reserva y un usuario pueden tener cero o muchas notificaciones.
-
-27. Cada nueva solicitud para unirse genera una notificación para el creador. Otros motivos de notificación quedan por definir.
-
-Datos derivados
-
-28. La edad del usuario se calcula a partir de su fecha de nacimiento; la duración de la reserva, a partir de su inicio y finalización. Estos valores deben mantenerse coherentes con los datos de origen.
+19. Un usuario no puede solicitar unirse si ya participa en esa reserva, ni tener más de una solicitud pendiente para la
