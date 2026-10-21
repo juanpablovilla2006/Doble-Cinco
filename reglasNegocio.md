@@ -49,6 +49,7 @@ Solicitudes para unirse
 22. Solo pueden aceptarse solicitudes pendientes para reservas que todavía no comenzaron, no están canceladas y tienen lugar disponible. El cupo debe comprobarse al aceptar, aunque hubiera lugar cuando se presentó la solicitud.
 
 Equipos
+
 23. Una reserva puede tener entre cero y dos equipos. Cada equipo pertenece a una única reserva.
 
 24. Un usuario puede integrar equipos de distintas reservas, pero solo puede integrar un equipo dentro de una misma reserva.
@@ -58,6 +59,7 @@ Equipos
 26. La cantidad de usuarios de un equipo se calcula a partir de sus integrantes.
 
 Chats y mensajes
+
 27. Cada reserva tiene un único chat y cada chat pertenece exclusivamente a una reserva. El chat depende de esa reserva y se identifica mediante ella.
 
 28. Solo los participantes de una reserva pueden acceder a su chat y enviar mensajes.
@@ -65,10 +67,12 @@ Chats y mensajes
 29. Cada mensaje pertenece a un único chat y tiene un único autor. Debe registrar un identificador, contenido y fecha de envío. El contenido puede repetirse entre mensajes.
 
 Notificaciones
+
 30. Cada notificación corresponde a una única reserva y se envía únicamente al creador de esa reserva. Una reserva y un usuario pueden tener cero o muchas notificaciones.
 
 31. Cada nueva solicitud para unirse genera una notificación para el creador. Otros motivos de notificación quedan por definir.
 
 Datos derivados
+
 32. La edad del usuario se calcula a partir de su fecha de nacimiento; la duración de la reserva, a partir de su inicio y finalización. Estos valores deben mantenerse coherentes con los datos de origen.
 
