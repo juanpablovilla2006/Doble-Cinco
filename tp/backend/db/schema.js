@@ -1,12 +1,19 @@
-import {
-  mysqlTable,int,varchar,decimal,boolean,date,time,timestamp,text,mysqlEnum,primaryKey} from "drizzle-orm/mysql-core";
+import { mysqlTable, int, varchar, decimal, boolean,date,time,timestamp,text,mysqlEnum,primaryKey } from "drizzle-orm/mysql-core";
+
+export const cancha = mysqlTable("cancha", {
+  numero: int("numero").primaryKey(),
+  tipo: varchar("tipo", { length: 30 }).notNull(),
+  capacidad: int("capacidad").notNull(),
+  precio: decimal("precio", { precision: 10, scale: 2 }).notNull(),
+  habilitada: boolean("habilitada").notNull().default(true)
+});
 
 export const usuario = mysqlTable("usuario", {
   id: int("id").primaryKey().autoincrement(),
   nombre: varchar("nombre", { length: 50 }).notNull(),
   apellido: varchar("apellido", { length: 50 }).notNull(),
   dni: varchar("dni", { length: 10 }).notNull(),
-  mail: varchar("mail", { length: 100 }).notNull(),
+  mail: varchar("mail", { length: 100 }).notNull().unique(),
   fecha_nac: date("fecha_nac", { mode: "string" }).notNull(),
   genero: varchar("genero", { length: 10 }).notNull(),
   descripcion: varchar("descripcion", { length: 200 }).notNull(),
@@ -15,23 +22,9 @@ export const usuario = mysqlTable("usuario", {
   password: varchar("password", { length: 100 }).notNull()
 });
 
-export const cancha = mysqlTable("cancha", {
-  numero: int("numero").primaryKey(),
-  tipo: varchar("tipo", { length: 30 }).notNull(),
-  capacidad: int("capacidad").notNull(),
-  precio: decimal("precio", {
-    precision: 10,
-    scale: 2
-  }).notNull(),
-  habilitada: boolean("habilitada").notNull().default(true)
-});
-
 export const reserva = mysqlTable("reserva", {
   id: int("id").primaryKey().autoincrement(),
-  precio: decimal("precio", {
-    precision: 10,
-    scale: 2
-  }).notNull(),
+  precio: decimal("precio", {precision: 10,scale: 2}).notNull(),
   estado_pago: boolean("estado_pago").notNull().default(false),
   estado_reserva: varchar("estado_reserva", { length: 20 }).notNull(),
   visibilidad: boolean("visibilidad").notNull().default(false),
@@ -40,7 +33,7 @@ export const reserva = mysqlTable("reserva", {
   dia: date("dia", { mode: "string" }).notNull(),
   codigo_invitacion: varchar("codigo_invitacion", { length: 50 }).notNull().unique(),
   numero_cancha: int("numero_cancha").notNull().references(() => cancha.numero),
-  id_creador: int("id_usuario").notNull().references(() => usuario.id)
+  id_creador: int("id_creador").notNull().references(() => usuario.id)
 });
 
 export const reserva_participante = mysqlTable(
