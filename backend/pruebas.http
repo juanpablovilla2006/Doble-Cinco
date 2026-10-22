@@ -73,3 +73,21 @@ Content-Type: application/json
   "capacidad": 14,
   "precio": 50000
 }
+
+### Crear un usuario con rol admin (tiene que decir user)
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Ángel",
+  "apellido": "Di Maria",
+  "dni": "1111111",
+  "mail": "angeldimaria11@gmail.com",
+  "fecha_nac": "1988-02-14",
+  "genero": "hombre",
+  "descripcion": "Capitan y bicampeon de Rosario Central",
+  "telefono": "111111111",
+  "rol": "admin",
+  "password": "claveCARC"
+}

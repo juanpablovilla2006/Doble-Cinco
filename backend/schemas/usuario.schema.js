@@ -13,7 +13,8 @@ export const usuarioSchema = z.object({
   genero: z.string().trim().min(1).max(10),
   descripcion: z.string().trim().max(200).default(""),
   telefono: z.string().trim().regex(/^\+?\d{6,14}$/, "El teléfono no es válido"),
-  rol: z.enum(["admin", "user"]).default("user"),
+  // Se borró el campo rol ya que por defecto se creera en la DB con rol user. De la manera anterior se podia crear un admin.
+  //EL admin hay que crearlo desde workbench
   // bcrypt solo considera los primeros 72 bytes
   password: z.string().min(8, "La contraseña tiene que tener al menos 8 caracteres").max(72)
 });
