@@ -3,6 +3,9 @@ import * as canchaRepository from "../repositories/cancha.repository.js";
 import * as reservaService from "./reserva.service.js";
 import { AppError } from "../errors/AppError.js";
 
+// Según el DER, una reserva tiene entre 0 y 2 equipos
+const MAX_EQUIPOS_POR_RESERVA = 2;
+
 // Carga la reserva (404 si no existe) y el equipo, verificando que sea de esa reserva
 async function cargar(idReserva, id) {
   const reserva = await reservaService.obtener(idReserva);
@@ -58,6 +61,13 @@ export async function crear(idReserva, datos) {
   const reserva = await reservaService.obtener(idReserva);
 
   verificarReservaActiva(reserva);
+
+  const equipos = await equipoRepository.listarPorReserva(idReserva);
+
+  if (equipos.length >= MAX_EQUIPOS_POR_RESERVA) {
+    throw new AppError(409, "La reserva ya tiene el máximo de equipos");
+  }
+
   await verificarTipoLibre(idReserva, datos.tipo);
 
   const id = await equipoRepository.crear({ ...datos, id_reserva: idReserva });

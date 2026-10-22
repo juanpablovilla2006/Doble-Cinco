@@ -112,3 +112,33 @@ export async function eliminar(id) {
   await obtener(id);
   await reservaRepository.eliminar(id);
 }
+
+export async function listarParticipantes(idReserva) {
+  const reserva = await obtener(idReserva);
+  const participantes = await reservaRepository.listarParticipantes(idReserva);
+
+  return participantes.map((participante) => ({
+    ...participante,
+    es_creador: participante.id === reserva.id_creador
+  }));
+}
+
+export async function abandonar(idReserva, idUsuario) {
+  const reserva = await obtener(idReserva);
+
+  if (reserva.estado_reserva === "cancelada") {
+    throw new AppError(409, "La reserva está cancelada");
+  }
+
+  if (idUsuario === reserva.id_creador) {
+    throw new AppError(409, "El creador no puede abandonar la reserva, tiene que cancelarla");
+  }
+
+  const participantes = await reservaRepository.listarParticipantes(idReserva);
+
+  if (!participantes.some((participante) => participante.id === idUsuario)) {
+    throw new AppError(404, "El usuario no es participante de la reserva");
+  }
+
+  await reservaRepository.quitarParticipante(idReserva, idUsuario);
+}

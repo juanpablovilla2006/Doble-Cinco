@@ -8,7 +8,8 @@ import {
   equipo,
   equipo_participante,
   solicitud,
-  notificacion
+  notificacion,
+  usuario
 } from "../db/schema.js";
 
 // En el listado no se expone el código de invitación (es lo que da acceso a las reservas privadas)
@@ -84,5 +85,36 @@ export function eliminar(id) {
     await tx.delete(notificacion).where(eq(notificacion.id_reserva, id));
     await tx.delete(reserva_participante).where(eq(reserva_participante.id_reserva, id));
     await tx.delete(reserva).where(eq(reserva.id, id));
+  });
+}
+
+// Datos públicos de los participantes (no se exponen mail, dni ni teléfono)
+export function listarParticipantes(idReserva) {
+  return db
+    .select({ id: usuario.id, nombre: usuario.nombre, apellido: usuario.apellido })
+    .from(reserva_participante)
+    .innerJoin(usuario, eq(reserva_participante.id_usuario, usuario.id))
+    .where(eq(reserva_participante.id_reserva, idReserva));
+}
+
+// Saca al usuario de la reserva y también de su equipo, si estaba en alguno
+export function quitarParticipante(idReserva, idUsuario) {
+  return db.transaction(async (tx) => {
+    const equiposDeLaReserva = tx.select({ id: equipo.id }).from(equipo).where(eq(equipo.id_reserva, idReserva));
+
+    await tx
+      .delete(equipo_participante)
+      .where(
+        and(
+          eq(equipo_participante.id_usuario, idUsuario),
+          inArray(equipo_participante.id_equipo, equiposDeLaReserva)
+        )
+      );
+
+    await tx
+      .delete(reserva_participante)
+      .where(
+        and(eq(reserva_participante.id_reserva, idReserva), eq(reserva_participante.id_usuario, idUsuario))
+      );
   });
 }

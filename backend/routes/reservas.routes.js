@@ -4,7 +4,8 @@ import {
   reservaSchema,
   editarReservaSchema,
   filtrosReservaSchema,
-  idParamSchema
+  idParamSchema,
+  participanteParamSchema
 } from "../schemas/reserva.schema.js";
 import { validar } from "../middlewares/validar.js";
 
@@ -34,5 +35,20 @@ router.delete("/:id", validar(idParamSchema, "params"), async (req, res) => {
   await reservaService.eliminar(id);
   res.status(204).end();
 });
+
+router.get("/:id/participantes", validar(idParamSchema, "params"), async (req, res) => {
+  const id = req.validado.params.id;
+  res.json(await reservaService.listarParticipantes(id));
+});
+
+router.delete(
+  "/:id/participantes/:idUsuario",
+  validar(participanteParamSchema, "params"),
+  async (req, res) => {
+    const { id, idUsuario } = req.validado.params;
+    await reservaService.abandonar(id, idUsuario);
+    res.status(204).end();
+  }
+);
 
 export default router;

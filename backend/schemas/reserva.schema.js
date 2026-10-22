@@ -60,3 +60,7 @@ export const filtrosReservaSchema = z.object({
 export const idParamSchema = z.object({
   id: idPositivo("El id de reserva")
 });
+
+export const participanteParamSchema = idParamSchema.extend({
+  idUsuario: idPositivo("El id de usuario")
+});
