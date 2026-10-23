@@ -9,6 +9,10 @@ router.get("/", async (req, res) => {
   res.json(await canchaService.listar());
 });
 
+router.get("/disponibles", validar(disponiblesQuerySchema, "query"), async (req, res) => {
+  res.json(await canchaService.listarDisponibles(req.validado.query));
+});
+
 router.get("/:numero", validar(numeroParamSchema,"params") , async (req, res) => {
   const numero = req.validado.params.numero;
   res.json(await canchaService.obtener(numero));
@@ -28,10 +32,6 @@ router.delete("/:numero", validar(numeroParamSchema, "params"), async (req, res)
   const numero = req.validado.params.numero; 
   await canchaService.eliminar(numero);
   res.status(204).end();
-});
-
-router.get("/disponibles", validar(disponiblesQuerySchema, "query"), async (req, res) => {
-  res.json(await canchaService.listarDisponibles(req.validado.query));
 });
 
 export default router;
