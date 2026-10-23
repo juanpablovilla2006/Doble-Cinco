@@ -91,3 +91,35 @@ Content-Type: application/json
   "rol": "admin",
   "password": "claveCARC"
 }
+
+### Crear usuario prueba
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "id": 2,
+  "nombre": "Nicolas",
+  "apellido": "Paz",
+  "dni": "10101010",
+  "mail": "nicopaz10@gmail.com",
+  "fecha_nac": "2006-03-23",
+  "genero": "hombre",
+  "descripcion": "Próximo 10 de la selección",
+  "telefono": "341101010",
+  "password": "jugadorazo"
+}
+
+### Modificar campos de usuario prueba
+PUT http://localhost:3000/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Nicolas",
+  "apellido": "Paz",
+  "dni": "10101010",
+  "mail": "nicopaz10@gmail.com",
+  "fecha_nac": "2004-09-08",
+  "genero": "hombre",
+  "telefono": "341101010",
+  "password": "jugadorazo"
+}

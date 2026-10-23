@@ -20,7 +20,7 @@ export const usuarioSchema = z.object({
 });
 
 // En la edición la contraseña es opcional: si no viene, se mantiene la actual
-export const editarUsuarioSchema = usuarioSchema.partial({ password: true });
+export const editarUsuarioSchema = usuarioSchema.partial({ password: true }).extend({ descripcion: z.string().trim().max(200).optional()});
 
 export const idParamSchema = z.object({
   id: z.coerce
