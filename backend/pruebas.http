@@ -128,7 +128,7 @@ Content-Type: application/json
 POST http://localhost:3000/reservas
 Content-Type: application/json
 
-{ "id": 2,
+{ 
   "numero_cancha": 5, 
   "id_creador": 2, 
   "dia": "2026-10-28",
@@ -140,3 +140,6 @@ PUT http://localhost:3000/reservas/1
 Content-Type: application/json
 
 {"horario_inicio": "18:00"}
+
+### Borrar una cancha con reservas
+DELETE http://localhost:3000/canchas/5

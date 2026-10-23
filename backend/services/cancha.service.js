@@ -39,5 +39,15 @@ export async function actualizar(numero, datos) {
 
 export async function eliminar(numero) {
   await obtener(numero);
-  await canchaRepository.eliminar(numero);
+  try {
+    await canchaRepository.eliminar(numero);
+  }
+  catch (error) {
+    const codigo = error.code ?? error.cause?.code;
+
+    if (codigo === "ER_ROW_IS_REFERENCED_2"){
+      throw new AppError(409,"No se puede eliminar esta cancha porque tiene reservas");
+    }
+    throw error;
+  }
 }
