@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as canchaService from "../services/cancha.service.js";
-import { canchaSchema, editarCanchaSchema, numeroParamSchema } from "../schemas/cancha.schema.js";
+import { canchaSchema, editarCanchaSchema, numeroParamSchema, disponiblesQuerySchema } from "../schemas/cancha.schema.js";
 import { validar } from "../middlewares/validar.js";
 
 const router = Router();
@@ -28,6 +28,10 @@ router.delete("/:numero", validar(numeroParamSchema, "params"), async (req, res)
   const numero = req.validado.params.numero; 
   await canchaService.eliminar(numero);
   res.status(204).end();
+});
+
+router.get("/disponibles", validar(disponiblesQuerySchema, "query"), async (req, res) => {
+  res.json(await canchaService.listarDisponibles(req.validado.query));
 });
 
 export default router;

@@ -51,3 +51,7 @@ export async function eliminar(numero) {
     throw error;
   }
 }
+
+export function listarDisponibles(filtros) {
+  return canchaRepository.listarDisponibles(filtros);
+}
