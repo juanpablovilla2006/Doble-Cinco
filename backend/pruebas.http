@@ -110,7 +110,7 @@ Content-Type: application/json
 }
 
 ### Modificar campos de usuario prueba
-PUT http://localhost:3000/usuarios
+PUT http://localhost:3000/usuarios/2
 Content-Type: application/json
 
 {
@@ -123,3 +123,20 @@ Content-Type: application/json
   "telefono": "341101010",
   "password": "jugadorazo"
 }
+
+### Crear reserva pública
+POST http://localhost:3000/reservas
+Content-Type: application/json
+
+{ "id": 2,
+  "numero_cancha": 5, 
+  "id_creador": 2, 
+  "dia": "2026-10-28",
+  "horario_inicio": "15:00", 
+  "horario_fin": "16:00"}
+
+### Modificar reserva
+PUT http://localhost:3000/reservas/1
+Content-Type: application/json
+
+{"horario_inicio": "18:00"}

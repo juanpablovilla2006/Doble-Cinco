@@ -30,7 +30,7 @@ const reservaBase = z.object({
   dia: fecha,
   horario_inicio: hora,
   horario_fin: hora,
-  visibilidad: z.boolean().default(false),
+  visibilidad: z.boolean(),
   estado_reserva: z.enum(ESTADOS_RESERVA),
   estado_pago: z.boolean()
 });
@@ -38,6 +38,7 @@ const reservaBase = z.object({
 // Al crear, precio, estado, pago y código de invitación los define el sistema
 export const reservaSchema = reservaBase
   .omit({ estado_reserva: true, estado_pago: true })
+  .extend({ visibilidad: z.boolean().default(false) })
   .refine(finPosteriorAInicio.check, finPosteriorAInicio.opciones);
 
 // Al editar todo es opcional y el creador no se puede cambiar
