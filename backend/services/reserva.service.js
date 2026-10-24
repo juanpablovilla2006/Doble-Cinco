@@ -4,11 +4,20 @@ import * as canchaRepository from "../repositories/cancha.repository.js";
 import * as usuarioRepository from "../repositories/usuario.repository.js";
 import { AppError } from "../errors/AppError.js";
 
-// Fecha de hoy (YYYY-MM-DD) en horario argentino, no en UTC
-function hoy() {
-  return new Date().toLocaleDateString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
+// trae el momento actual a la hora de la reserva
+function ahora() {
+  const [dia, hora] = new Date()
+    .toLocaleString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" })
+    .split(" ");
+  return { dia, hora };
 }
-
+// compara el moemnto actual con la reserva esperada para verificar quen no este en el mismo dia pero en una hora pasada
+function verificarFuturo(dia, horarioInicio, mensaje) {
+  const actual = ahora();
+  if (dia < actual.dia || (dia === actual.dia && horarioInicio <= actual.hora)) {
+    throw new AppError(400, mensaje);
+  }
+}
 async function obtenerCanchaHabilitada(numero) {
   const cancha = await canchaRepository.buscarPorNumero(numero);
 
@@ -46,9 +55,8 @@ export async function obtener(id) {
 }
 
 export async function crear(datos) {
-  if (datos.dia < hoy()) {
-    throw new AppError(400, "No se puede reservar en una fecha pasada");
-  }
+  
+  verificarFuturo(datos.dia, datos.horario_inicio, "La reserva tiene que ser en una fecha y horario futuros");
 
   const creador = await usuarioRepository.buscarPorId(datos.id_creador);
 
