@@ -39,8 +39,11 @@ async function verificarTurnoLibre(turno, excluirId) {
     throw new AppError(409, "La cancha ya está reservada en ese horario");
   }
 }
-
+// filtra para que solo las reservas publicas puedan listarse
 export function listar(filtros) {
+  if (filtros.visibilidad === undefined && filtros.id_creador === undefined) {
+    filtros = { ...filtros, visibilidad: true };
+  }
   return reservaRepository.listar(filtros);
 }
 
