@@ -96,8 +96,9 @@ export async function actualizar(id, datos) {
     throw new AppError(400, "El horario de fin tiene que ser posterior al de inicio");
   }
 
-  if (datos.dia && datos.dia < ahora().dia) {
-    throw new AppError(400, "No se puede mover la reserva a una fecha pasada");
+  // entra al if si se cambia el dia o la hora de inicio
+  if (datos.dia !== undefined || datos.horario_inicio !== undefined) {
+  verificarFuturo(nueva.dia, nueva.horario_inicio, "La reserva tiene que ser en una fecha y horario futuros");
   }
   // si se cambia la cancha, se verifica que la nueva cancha tenga capacidad para los participantes actuales
   if (datos.numero_cancha !== undefined && datos.numero_cancha !== actual.numero_cancha) {
