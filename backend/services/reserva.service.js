@@ -96,7 +96,7 @@ export async function actualizar(id, datos) {
     throw new AppError(400, "El horario de fin tiene que ser posterior al de inicio");
   }
 
-  if (datos.dia && datos.dia < hoy()) {
+  if (datos.dia && datos.dia < ahora().dia) {
     throw new AppError(400, "No se puede mover la reserva a una fecha pasada");
   }
   // si se cambia la cancha, se verifica que la nueva cancha tenga capacidad para los participantes actuales

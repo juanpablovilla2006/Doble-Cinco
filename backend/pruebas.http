@@ -143,3 +143,24 @@ Content-Type: application/json
 
 ### Borrar una cancha con reservas
 DELETE http://localhost:3000/canchas/5
+
+### Crear equipo
+POST http://localhost:3000/reservas/1/equipos
+Content-Type: application/json
+
+{"tipo": "Visitante"}
+
+### Borrar equipo
+DELETE http://localhost:3000/reservas/1/participantes/2
+
+### Agregar creador al equipo local
+POST http://localhost:3000/reservas/1/equipos/3/participantes
+Content-Type: application/json
+
+{ "id_usuario": 2}
+
+### Sacar un participante de un equipo pero no de la reserva
+DELETE http://localhost:3000/reservas/1/equipos/3/participantes/2
+
+### Sacar un participante de la reserva
+DELETE http://localhost:3000/reservas/1/participantes/2

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {hora} from "./cancha.schema.js";
+import {hora} from "./reserva.schema.js";
  
 export const canchaSchema = z.object({
   numero: z.number().int().positive(),
