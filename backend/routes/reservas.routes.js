@@ -17,7 +17,9 @@ router.get("/", validar(filtrosReservaSchema, "query"), async (req, res) => {
 
 router.get("/:id", validar(idParamSchema, "params"), async (req, res) => {
   const id = req.validado.params.id;
-  res.json(await reservaService.obtener(id));
+  //ocultamos el codigo de invitacion para que no se pueda ver
+  const { codigo_invitacion, ...reserva } = await reservaService.obtener(id);
+  res.json(reserva);
 });
 
 router.post("/", validar(reservaSchema), async (req, res) => {
@@ -27,7 +29,9 @@ router.post("/", validar(reservaSchema), async (req, res) => {
 
 router.put("/:id", validar(idParamSchema, "params"), validar(editarReservaSchema), async (req, res) => {
   const id = req.validado.params.id;
-  res.json(await reservaService.actualizar(id, req.validado.body));
+  //ocultamos el codigo de invitacion para que no se pueda modificar ni ver
+  const { codigo_invitacion, ...reserva } = await reservaService.actualizar(id, req.validado.body);
+  res.json(reserva);
 });
 
 router.delete("/:id", validar(idParamSchema, "params"), async (req, res) => {
