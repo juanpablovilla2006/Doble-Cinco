@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Ver cancha 1
-GET http://localhost:3000/canchas/1
+GET http://localhost:3000/canchas/5
 
 ### Ver cancha con datos no validos (400)
 GET http://localhost:3000/canchas/0
@@ -131,9 +131,9 @@ Content-Type: application/json
 { 
   "numero_cancha": 5, 
   "id_creador": 2, 
-  "dia": "2026-10-28",
-  "horario_inicio": "15:00", 
-  "horario_fin": "16:00"}
+  "dia": "2026-10-30",
+  "horario_inicio": "18:00", 
+  "horario_fin": "19:00"}
 
 ### Modificar reserva
 PUT http://localhost:3000/reservas/1
