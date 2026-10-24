@@ -96,12 +96,16 @@ export async function actualizar(id, datos) {
   if (datos.dia && datos.dia < hoy()) {
     throw new AppError(400, "No se puede mover la reserva a una fecha pasada");
   }
-
+  // si se cambia la cancha, se verifica que la nueva cancha tenga capacidad para los participantes actuales
   if (datos.numero_cancha !== undefined && datos.numero_cancha !== actual.numero_cancha) {
     const cancha = await obtenerCanchaHabilitada(datos.numero_cancha);
+    const participantes = await reservaRepository.listarParticipantes(id);
+
+    if (participantes.length > cancha.capacidad) {
+    throw new AppError(409, "La nueva cancha no tiene capacidad para los participantes actuales");
+    }
     cambios.precio = cancha.precio;
   }
-
   const cambiaTurno =
     nueva.numero_cancha !== actual.numero_cancha ||
     nueva.dia !== actual.dia ||
