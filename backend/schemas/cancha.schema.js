@@ -1,5 +1,6 @@
 import { z } from "zod";
-
+import {hora} from "./cancha.schema.js";
+ 
 export const canchaSchema = z.object({
   numero: z.number().int().positive(),
   tipo: z.string().trim().min(1).max(30),
@@ -20,8 +21,8 @@ export const numeroParamSchema = z.object({
 export const disponiblesQuerySchema = z
   .object({
     dia: z.iso.date(),
-    horario_inicio: z.iso.time(),
-    horario_fin: z.iso.time(),
+    horario_inicio: hora,
+    horario_fin: hora,
     tipo: z.string().trim().min(1).max(30).optional()
   })
   .refine((q) => q.horario_inicio < q.horario_fin, {

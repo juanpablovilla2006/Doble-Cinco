@@ -6,7 +6,7 @@ export const ESTADOS_RESERVA = ["pendiente", "confirmada", "cancelada"];
 const fecha = z.iso.date("El día tiene que tener formato YYYY-MM-DD");
 
 // Acepta HH:MM o HH:MM:SS y lo normaliza a HH:MM:SS, así se puede comparar como string
-const hora = z
+export const hora = z
   .string()
   .trim()
   .regex(/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/, "El horario tiene que tener formato HH:MM")
