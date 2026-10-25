@@ -1,0 +1,9 @@
+.registro__formulario {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.registro__pie {
+  margin-top: 16px;
+  text-align: center;
+}

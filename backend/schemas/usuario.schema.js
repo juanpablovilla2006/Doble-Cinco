@@ -1,6 +1,13 @@
 import { z } from "zod";
 
+const EDAD_MINIMA = 14;
 const hoy = () => new Date().toISOString().slice(0, 10);
+
+function fechaLimiteNacimiento() {
+  const limite = new Date();
+  limite.setFullYear(limite.getFullYear() - EDAD_MINIMA);
+  return limite.toISOString().slice(0, 10);
+}
 
 export const usuarioSchema = z.object({
   nombre: z.string().trim().min(1).max(50),
@@ -9,6 +16,7 @@ export const usuarioSchema = z.object({
   mail: z.email("El mail no es válido").trim().toLowerCase().max(100),
   fecha_nac: z.iso
     .date("La fecha de nacimiento tiene que tener formato YYYY-MM-DD")
+    .refine((fecha) => fecha <= fechaLimiteNacimiento(), `Tenés que tener al menos ${EDAD_MINIMA} años`)
     .refine((fecha) => fecha <= hoy(), "La fecha de nacimiento no puede ser futura"),
   genero: z.string().trim().min(1).max(10),
   descripcion: z.string().trim().max(200).default(""),

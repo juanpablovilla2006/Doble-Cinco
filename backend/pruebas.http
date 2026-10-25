@@ -19,13 +19,13 @@ GET http://localhost:3000/canchas/0
 GET http://localhost:3000/canchas/49
 
 ### Modificar cancha
-PUT http://localhost:3000/canchas/3
+PUT http://localhost:3000/canchas/1
 Content-Type: application/json
 
 {
-  "tipo": "cancha de futsal",
-  "capacidad": 10,
-  "precio": 30000,
+  "tipo": "cancha de 8",
+  "capacidad": 16,
+  "precio": 50000,
   "habilitada": true
 }
 
@@ -102,7 +102,7 @@ Content-Type: application/json
   "apellido": "Paz",
   "dni": "10101010",
   "mail": "nicopaz10@gmail.com",
-  "fecha_nac": "2006-03-23",
+  "fecha_nac": "2036-03-23",
   "genero": "hombre",
   "descripcion": "Próximo 10 de la selección",
   "telefono": "341101010",
