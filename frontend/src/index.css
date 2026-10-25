@@ -3,3 +3,14 @@
   --bs-primary: #0DBA60;
   --bs-primary-rgb: 13, 186, 96;
 }
+
+/* Bootstrap no toma --bs-primary en los botones*/
+.btn-primary {
+  --bs-btn-bg: var(--color-primario);
+  --bs-btn-border-color: var(--color-primario);
+  --bs-btn-hover-bg: #0aa755;
+  --bs-btn-hover-border-color: #0aa755;
+  --bs-btn-active-bg: #099a4e;
+  --bs-btn-active-border-color: #099a4e;
+  --bs-btn-focus-shadow-rgb: 13, 186, 96;
+}
