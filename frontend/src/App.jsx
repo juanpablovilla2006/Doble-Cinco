@@ -1,31 +1,18 @@
-import { useEffect, useState } from "react";
-import BarraMenu from "./components/BarraMenu/BarraMenu.jsx";
-import { listarCanchas } from "./services/canchaService.js";
-import CanchaItem from "./components/CanchaItem/CanchaItem.jsx";
+import { Routes, Route } from "react-router";
+import Inicio from "./pages/Inicio/Inicio.jsx";
+import Canchas from "./pages/Canchas/Canchas.jsx";
+import Reservar from "./pages/Reservar/Reservar.jsx";
+import MisReservas from "./pages/MisReservas/MisReservas.jsx";
+import MiCuenta from "./pages/MiCuenta/MiCuenta.jsx";
 
-function App() {
-  const [canchas, setCanchas] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    listarCanchas()
-      .then((datos) => setCanchas(datos))
-      .catch((e) => setError(e.message));
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <BarraMenu titulo="Nuestras canchas" />
-      <main className="container py-4">
-        {error && <p className="text-danger">{error}</p>}
-        <ul className="list-unstyled d-flex flex-column gap-3">
-          {canchas.map((cancha) => (
-            <CanchaItem key={cancha.numero} cancha={cancha}/>
-          ))}
-        </ul>
-      </main>
-    </>
+    <Routes>
+      <Route path="/" element={<Inicio />} />
+      <Route path="/canchas" element={<Canchas />} />
+      <Route path="/reservar" element={<Reservar />} />
+      <Route path="/mis-reservas" element={<MisReservas />} />
+      <Route path="/cuenta" element={<MiCuenta />} />
+    </Routes>
   );
 }
-
-export default App;

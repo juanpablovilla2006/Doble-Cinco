@@ -2,6 +2,7 @@ import "./BarraMenu.css";
 import MenuDesplegable from "../MenuDesplegable/MenuDesplegable.jsx";
 import iconoCampana from "../../assets/imagenes/icono-campana.png";
 import iconoCuenta from "../../assets/imagenes/icono-cuenta.png";
+import { Link } from "react-router";
 
 export default function BarraMenu({ titulo }) {
   return (
@@ -14,9 +15,9 @@ export default function BarraMenu({ titulo }) {
         <button type="button" className="btn p-0 border-0" aria-label="Notificaciones">
           <img src={iconoCampana} alt="" height="38" />
         </button>
-        <a href="/cuenta" aria-label="Mi cuenta">
+        <Link to="/cuenta" aria-label="Mi cuenta">
           <img src={iconoCuenta} alt="" height="42" />
-        </a>
+        </Link>
       </div>
     </header>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import iconoMenu from "../../assets/imagenes/icono-menu.png";
 
 const opciones = [
@@ -28,7 +29,8 @@ export default function MenuDesplegable() {
       <ul id="menu-principal" className={`dropdown-menu top-100 start-0 ${abierto ? "show" : ""}`}>
         {opciones.map((opcion) => (
           <li key={opcion.ruta}>
-            <a className="dropdown-item" href={opcion.ruta}>{opcion.texto}</a>
+            <Link className="dropdown-item" to={opcion.ruta} onClick={()=> setAbierto(false)}> {opcion.texto}
+            </Link>
           </li>
         ))}
       </ul>
