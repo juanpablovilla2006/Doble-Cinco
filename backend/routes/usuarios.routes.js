@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as usuarioService from "../services/usuario.service.js";
-import { usuarioSchema, editarUsuarioSchema, idParamSchema } from "../schemas/usuario.schema.js";
+import { usuarioSchema, editarUsuarioSchema, idParamSchema, loginSchema } from "../schemas/usuario.schema.js";
 import { validar } from "../middlewares/validar.js";
 
 const router = Router();
@@ -28,6 +28,10 @@ router.delete("/:id", validar(idParamSchema, "params"), async (req, res) => {
   const id = req.validado.params.id;
   await usuarioService.eliminar(id);
   res.status(204).end();
+});
+
+router.post("/login", validar(loginSchema), async (req, res) => {
+  res.json(await usuarioService.ingresar(req.validado.body));
 });
 
 export default router;

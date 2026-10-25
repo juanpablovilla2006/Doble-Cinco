@@ -14,6 +14,12 @@ export async function buscarPorId(id) {
   return fila ?? null;
 }
 
+// Trae también el hash de la contraseña: solo para uso interno del service de ingreso
+export async function buscarPorMail(mail) {
+  const [fila] = await db.select().from(usuario).where(eq(usuario.mail, mail));
+  return fila ?? null;
+}
+
 export async function crear(datos) {
   const [resultado] = await db.insert(usuario).values(datos);
   return resultado.insertId;

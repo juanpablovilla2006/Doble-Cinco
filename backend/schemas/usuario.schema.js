@@ -36,3 +36,9 @@ export const idParamSchema = z.object({
     .int("El id de usuario no es válido, tiene que ser entero")
     .positive("El id de usuario no es válido, tiene que ser mayor a cero")
 });
+
+// Para ingresar alcanza con mail y contraseña; no se revisan reglas de formato
+export const loginSchema = z.object({
+  mail: z.string().trim().toLowerCase().min(1, "El mail es obligatorio"),
+  password: z.string().min(1, "La contraseña es obligatoria")
+});

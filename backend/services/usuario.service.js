@@ -37,6 +37,18 @@ export async function crear(datos) {
   }
 }
 
+export async function ingresar({ mail, password }) {
+  const fila = await usuarioRepository.buscarPorMail(mail);
+  const coincide = fila ? await bcrypt.compare(password, fila.password) : false;
+
+  // Mismo mensaje si falla el mail o la contraseña, para no revelar qué mails existen
+  if (!coincide) {
+    throw new AppError(401, "Mail o contraseña incorrectos");
+  }
+
+  return obtener(fila.id);
+}
+
 export async function actualizar(id, datos) {
   await obtener(id);
 

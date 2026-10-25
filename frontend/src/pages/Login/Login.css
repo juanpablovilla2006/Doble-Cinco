@@ -1,0 +1,9 @@
+.login__formulario {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.login__pie {
+  margin-top: 16px;
+  text-align: center;
+}
