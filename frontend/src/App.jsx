@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
+import { listarCanchas } from "./services/canchaService.js";
 
 function App() {
   const [canchas, setCanchas] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/canchas")
-      .then((respuesta) => {
-        if (!respuesta.ok) throw new Error("No se pudieron traer las canchas");
-        return respuesta.json();
-      })
-      .then((datos) => setCanchas(datos))
-      .catch((e) => setError(e.message));
+      listarCanchas().then((datos) => setCanchas(datos)).catch((e) => setError(e.message));
   }, []);
 
   return (
