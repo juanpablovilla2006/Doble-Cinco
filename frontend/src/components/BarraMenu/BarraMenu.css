@@ -1,0 +1,24 @@
+.barra-menu {
+  background-color: var(--color-primario);
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 40px;
+}
+
+.barra-menu__titulo {
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2.3rem;
+}
+
+.barra-menu__acciones {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+}
