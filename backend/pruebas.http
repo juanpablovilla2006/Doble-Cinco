@@ -2,11 +2,11 @@
 POST http://localhost:3000/canchas
 Content-Type: application/json
 
-{ "numero": 6,
-"tipo": "cancha de 11",
-"capacidad": 22,
-"precio": 250000,
-"habilitada": false
+{ "numero": 4,
+"tipo": "cancha de 5",
+"capacidad": 10,
+"precio": 35000,
+"habilitada": true
 }
 
 ### Ver cancha 1
@@ -19,14 +19,14 @@ GET http://localhost:3000/canchas/0
 GET http://localhost:3000/canchas/49
 
 ### Modificar cancha
-PUT http://localhost:3000/canchas/1
+PUT http://localhost:3000/canchas/3
 Content-Type: application/json
 
 {
-  "tipo": "cancha de 8",
-  "capacidad": 16,
-  "precio": 20000,
-  "habilitada": false
+  "tipo": "cancha de futsal",
+  "capacidad": 10,
+  "precio": 30000,
+  "habilitada": true
 }
 
 ### Modificar cancha que no existe (404)
@@ -57,10 +57,10 @@ DELETE http://localhost:3000/canchas/5
 POST http://localhost:3000/canchas
 Content-Type: application/json
 
-{ "numero": 5,
-"tipo": "cancha de 6",
-"capacidad": 12,
-"precio": 36000,
+{ "numero": 2,
+"tipo": "cancha de 7",
+"capacidad": 14,
+"precio": 50000,
 "habilitada": true
 }
 

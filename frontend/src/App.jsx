@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BarraMenu from "./components/BarraMenu/BarraMenu.jsx";
 import { listarCanchas } from "./services/canchaService.js";
+import CanchaItem from "./components/CanchaItem/CanchaItem.jsx";
 
 function App() {
   const [canchas, setCanchas] = useState([]);
@@ -16,13 +17,10 @@ function App() {
     <>
       <BarraMenu titulo="Nuestras canchas" />
       <main className="container py-4">
-        <h2 className="h4 mb-3">Canchas disponibles</h2>
         {error && <p className="text-danger">{error}</p>}
-        <ul className="list-group">
+        <ul className="list-unstyled d-flex flex-column gap-3">
           {canchas.map((cancha) => (
-            <li key={cancha.numero} className="list-group-item">
-              Cancha {cancha.numero} - {cancha.tipo} - ${cancha.precio} - {cancha.capacidad}
-            </li>
+            <CanchaItem key={cancha.numero} cancha={cancha}/>
           ))}
         </ul>
       </main>
