@@ -1,0 +1,44 @@
+.reservar {
+  max-width: 520px;
+}
+ 
+.reservar__form {
+  display: grid;
+  gap: 16px;
+}
+ 
+.reservar__horarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+ 
+.reservar__canchas {
+  display: grid;
+  gap: 12px;
+}
+ 
+.reservar__cancha {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  text-align: left;
+  padding: 12px 16px;
+  background: #fff;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+}
+ 
+.reservar__cancha:hover {
+  border-color: var(--color-primario);
+}
+ 
+.reservar__cancha--activa {
+  border-color: var(--color-primario);
+  background: rgba(13, 186, 96, 0.08);
+}
+ 
+.reservar__confirmar {
+  display: grid;
+  gap: 16px;
+}
