@@ -12,3 +12,11 @@ export function crearReserva(datos) {
   return pedir("/reservas", { metodo: "POST", cuerpo: datos });
 }
  
+export function listarReservasDeUsuario(idUsuario) {
+  return pedir(`/reservas?id_creador=${idUsuario}`);
+}
+ 
+export function eliminarReserva(id) {
+  return pedir(`/reservas/${id}`, { metodo: "DELETE" });
+}
+ 

@@ -1,95 +1,30 @@
-.mis-reservas {
-  max-width: 720px;
-}
-
-.mis-reservas__filtro {
-  margin-bottom: 20px;
-}
-
 .mis-reservas__lista {
-  display: grid;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-}
-
-/* Cada reserva: la franja lateral indica el estado (verde activa, gris cancelada) */
-.reserva {
-  border: 1px solid #dee2e6;
-  border-left: 5px solid var(--color-primario);
-  border-radius: 10px;
-  background: #fff;
-}
-
-.reserva--cancelada {
-  border-left-color: #adb5bd;
-  background: #f8f9fa;
-}
-
-.reserva--cancelada .reserva__fecha,
-.reserva--cancelada .reserva__titulo {
-  color: #6c757d;
-}
-
-.reserva__cuerpo {
-  padding: 16px 20px;
-}
-
-.reserva__cabecera {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 4px;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
 }
 
-.reserva__titulo {
+.mis-reservas__item {
+  border-left: 6px solid var(--color-primario);
+}
+
+.mis-reservas__item--cancelada {
+  border-left-color: #9e2222;
+  opacity: 0.75;
+}
+
+.mis-reservas__dia {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
-}
-
-.reserva__fecha {
-  margin: 0 0 4px;
-  font-size: 1.05rem;
   text-transform: capitalize;
 }
 
-.reserva__datos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  margin: 0 0 16px;
-  padding: 0;
-  list-style: none;
-  color: #6c757d;
-  font-size: 0.925rem;
-}
-
-.reserva__acciones {
-  display: flex;
-  gap: 8px;
-}
-
-.reserva__form {
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid #dee2e6;
-}
-
-.reserva__confirmacion {
+.mis-reservas__datos {
   margin: 0;
-}
-
-@media (max-width: 575px) {
-  .reserva__cuerpo {
-    padding: 14px 16px;
-  }
-
-  /* En el celular los botones ocupan todo el ancho para tocarlos fácil */
-  .reserva__acciones,
-  .reserva__form .d-flex,
-  .reserva__confirmacion .d-flex {
-    flex-direction: column;
-  }
+  color: #555;
 }
