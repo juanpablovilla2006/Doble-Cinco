@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router";
 import iconoMenu from "../../assets/imagenes/icono-menu.png";
+import { UsuarioContext } from "../../context/UsuarioContext.js";
 
 const opciones = [
   { texto: "Inicio", ruta: "/" },
   { texto: "Cuenta", ruta: "/cuenta" },
   { texto: "Canchas", ruta: "/canchas" },
+  { texto: "Administrar Canchas", ruta: "/administrar-canchas", soloAdmin:true },
   { texto: "Reservar", ruta: "/reservar" },
   { texto: "Mis reservas", ruta: "/mis-reservas" }
 ];
 
 export default function MenuDesplegable() {
   const [abierto, setAbierto] = useState(false);
+  const { usuario } = useContext(UsuarioContext);
+
+  const opcionesVisibles = opciones.filter(
+    (opcion) => !opcion.soloAdmin || usuario?.rol === "admin"
+  );
 
   return (
     <div className="dropdown">
@@ -26,10 +33,18 @@ export default function MenuDesplegable() {
         <img src={iconoMenu} alt="" height="48" />
       </button>
 
-      <ul id="menu-principal" className={`dropdown-menu top-100 start-0 ${abierto ? "show" : ""}`}>
-        {opciones.map((opcion) => (
+      <ul
+        id="menu-principal"
+        className={`dropdown-menu top-100 start-0 ${abierto ? "show" : ""}`}
+      >
+        {opcionesVisibles.map((opcion) => (
           <li key={opcion.ruta}>
-            <Link className="dropdown-item" to={opcion.ruta} onClick={()=> setAbierto(false)}> {opcion.texto}
+            <Link
+              className="dropdown-item"
+              to={opcion.ruta}
+              onClick={() => setAbierto(false)}
+            >
+              {opcion.texto}
             </Link>
           </li>
         ))}

@@ -7,12 +7,15 @@ import MiCuenta from "./pages/MiCuenta/MiCuenta.jsx";
 import Registro from "./pages/Registro/Registro.jsx";
 import Login from "./pages/Login/Login.jsx";
 import MisDatos from "./pages/MisDatos/MisDatos.jsx";
+import AdministrarCanchas from "./pages/AdministrarCanchas/AdministrarCanchas.jsx";
+import RutaAdmin from "./components/RutaAdmin/RutaAdmin.jsx";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Inicio />} />
       <Route path="/canchas" element={<Canchas />} />
+      <Route path="/administrar-canchas" element={<RutaAdmin><AdministrarCanchas /></RutaAdmin>}/>
       <Route path="/reservar" element={<Reservar />} />
       <Route path="/mis-reservas" element={<MisReservas />} />
       <Route path="/cuenta" element={<MiCuenta />} />
