@@ -1,5 +1,5 @@
 import { z } from "zod";
-import {hora} from "./reserva.schema.js";
+import { horaDeTurno, validarTurno } from "./reserva.schema.js";
  
 export const canchaSchema = z.object({
   numero: z.number().int().positive(),
@@ -21,11 +21,8 @@ export const numeroParamSchema = z.object({
 export const disponiblesQuerySchema = z
   .object({
     dia: z.iso.date(),
-    horario_inicio: hora,
-    horario_fin: hora,
+    horario_inicio: horaDeTurno,
+    horario_fin: horaDeTurno,
     tipo: z.string().trim().min(1).max(30).optional()
   })
-  .refine((q) => q.horario_inicio < q.horario_fin, {
-    message: "El horario de inicio debe ser anterior al de fin",
-    path: ["horario_fin"]
-  });
+  .superRefine(validarTurno);

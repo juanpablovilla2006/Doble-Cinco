@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { DURACION_MINIMA, MINUTOS_POR_PASO, esHorarioDeTurno, minutosEntre } from "../utils/horarios.js";
 
 // Valores posibles de reserva.estado_reserva (la columna es un varchar libre)
 export const ESTADOS_RESERVA = ["pendiente", "confirmada", "cancelada"];
@@ -18,11 +19,25 @@ const idPositivo = (nombre) =>
     .int(`${nombre} no es válido, tiene que ser entero`)
     .positive(`${nombre} no es válido, tiene que ser mayor a cero`);
 
-const finPosteriorAInicio = {
-  check: (r) => !r.horario_inicio || !r.horario_fin || r.horario_fin > r.horario_inicio,
-  opciones: { message: "El horario de fin tiene que ser posterior al de inicio", path: ["horario_fin"] }
-};
+// Horario de un turno: además del formato, tiene que ir de a 15 minutos (00, 15, 30 o 45)
+export const horaDeTurno = hora.refine(esHorarioDeTurno,
+  `El horario tiene que ser de a ${MINUTOS_POR_PASO} minutos (minutos 00, 15, 30 o 45)`
+);
 
+// Fin posterior al inicio y duración mínima. Se usa con .superRefine sobre cualquier schema con horario_inicio y horario_fin
+export function validarTurno(turno, ctx) {
+  if (!turno.horario_inicio || !turno.horario_fin) {
+    return;
+  }
+
+  const duracion = minutosEntre(turno.horario_inicio, turno.horario_fin);
+
+  if (duracion <= 0) {
+    ctx.addIssue({ code: "custom", message: "El horario de fin tiene que ser posterior al de inicio", path: ["horario_fin"] });
+  } else if (duracion < DURACION_MINIMA) {
+    ctx.addIssue({ code: "custom", message: "La reserva tiene que durar al menos 1 hora", path: ["horario_fin"] });
+  }
+}
 // Base sin refinamientos: en zod 4 no se puede hacer partial/omit sobre un schema refinado
 const reservaBase = z.object({
   numero_cancha: z.number().int().positive(),
@@ -39,13 +54,13 @@ const reservaBase = z.object({
 export const reservaSchema = reservaBase
   .omit({ estado_reserva: true, estado_pago: true })
   .extend({ visibilidad: z.boolean().default(false) })
-  .refine(finPosteriorAInicio.check, finPosteriorAInicio.opciones);
+  .superRefine(validarTurno);
 
 // Al editar todo es opcional y el creador no se puede cambiar
 export const editarReservaSchema = reservaBase
   .omit({ id_creador: true })
   .partial()
-  .refine(finPosteriorAInicio.check, finPosteriorAInicio.opciones);
+  .superRefine(validarTurno);
 
 export const filtrosReservaSchema = z.object({
   dia: fecha.optional(),

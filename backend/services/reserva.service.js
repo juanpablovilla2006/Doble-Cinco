@@ -3,6 +3,7 @@ import * as reservaRepository from "../repositories/reserva.repository.js";
 import * as canchaRepository from "../repositories/cancha.repository.js";
 import * as usuarioRepository from "../repositories/usuario.repository.js";
 import { AppError } from "../errors/AppError.js";
+import { DURACION_MINIMA, minutosEntre } from "../utils/horarios.js";
 
 // trae el momento actual a la hora de la reserva
 function ahora() {
@@ -94,6 +95,14 @@ export async function actualizar(id, datos) {
 
   if (nueva.horario_fin <= nueva.horario_inicio) {
     throw new AppError(400, "El horario de fin tiene que ser posterior al de inicio");
+  }
+
+    // Si se toca el horario, la reserva que queda tiene que durar al menos 1 hora
+  if (
+    (datos.horario_inicio !== undefined || datos.horario_fin !== undefined) &&
+    minutosEntre(nueva.horario_inicio, nueva.horario_fin) < DURACION_MINIMA
+  ) {
+    throw new AppError(400, "La reserva tiene que durar al menos 1 hora");
   }
 
   // entra al if si se cambia el dia o la hora de inicio

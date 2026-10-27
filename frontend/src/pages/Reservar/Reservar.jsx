@@ -3,8 +3,9 @@ import { Link } from "react-router";
 import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import { useUsuario } from "../../hooks/useUsuario.js";
 import { listarCanchas } from "../../services/canchaService.js";
-import { buscarCanchasDisponibles, crearReserva } from "../../services/reservaService.js";
+import { buscarCanchasDisponibles, crearReserva } from "../../services/reservaService.js"
 import "./Reservar.css";
+import { HORARIOS_DE_INICIO, horariosDeFin } from "../../utils/horarios.js";
 
 // Fecha de hoy en formato YYYY-MM-DD según la hora local (no UTC)
 function hoy() {
@@ -36,7 +37,15 @@ export default function Reservar() {
   }, []);
 
   function cambiarFiltro(e) {
-    setFiltros({ ...filtros, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const nuevos = { ...filtros, [name]: value };
+
+    // Si el fin ya no cumple la duración mínima con el nuevo inicio, se borra
+    if (name === "horario_inicio" && !horariosDeFin(value).includes(nuevos.horario_fin)) {
+      nuevos.horario_fin = "";
+    }
+
+    setFiltros(nuevos);
     // Si cambia el turno, los resultados anteriores ya no sirven
     setCanchas(null);
     setSeleccionada(null);
@@ -173,27 +182,22 @@ export default function Reservar() {
           <div className="reservar__horarios">
             <div>
               <label className="form-label" htmlFor="horario_inicio">Desde</label>
-              <input
-                id="horario_inicio"
-                name="horario_inicio"
-                type="time"
-                className="form-control"
-                value={filtros.horario_inicio}
-                onChange={cambiarFiltro}
-                required
-              />
+              <select id="horario_inicio" name="horario_inicio" className="form-select" value={filtros.horario_inicio} onChange={cambiarFiltro} required>
+                <option value="">Elegí</option>
+                {HORARIOS_DE_INICIO.map((h) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
             </div>
             <div>
               <label className="form-label" htmlFor="horario_fin">Hasta</label>
-              <input
-                id="horario_fin"
-                name="horario_fin"
-                type="time"
-                className="form-control"
-                value={filtros.horario_fin}
-                onChange={cambiarFiltro}
-                required
-              />
+              <select
+                id="horario_fin" name="horario_fin" className="form-select" value={filtros.horario_fin} onChange={cambiarFiltro} disabled={!filtros.horario_inicio} required>
+                <option value="">Elegí</option>
+                {horariosDeFin(filtros.horario_inicio).map((h) => (
+                  <option key={h} value={h}>{h}</option>
+                ))}
+              </select>
             </div>
           </div>
 
