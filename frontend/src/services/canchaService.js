@@ -1,11 +1,17 @@
-const API_URL = "http://localhost:3000";
+import { pedir } from "./api.js";
 
-export async function listarCanchas() {
-  const respuesta = await fetch(`${API_URL}/canchas`);
+export function listarCanchas() {
+  return pedir("/canchas");
+}
 
-  if (!respuesta.ok) {
-    throw new Error("No se pudieron traer las canchas");
-  }
+export function crearCancha(datos) {
+  return pedir("/canchas", { metodo: "POST", cuerpo: datos });
+}
 
-  return respuesta.json();
+export function actualizarCancha(numero, datos) {
+  return pedir(`/canchas/${numero}`, { metodo: "PUT", cuerpo: datos });
+}
+
+export function eliminarCancha(numero) {
+  return pedir(`/canchas/${numero}`, { metodo: "DELETE" });
 }
