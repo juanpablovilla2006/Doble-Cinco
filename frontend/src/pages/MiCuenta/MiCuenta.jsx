@@ -13,6 +13,12 @@ export default function MiCuenta() {
         <div className="mi-cuenta__acciones">
           {usuario && <p className="mi-cuenta__saludo">Hola, {usuario.nombre}</p>}
 
+          {usuario?.rol === "admin" && (
+            <Link className="btn btn-primary btn-lg" to="/cuenta/canchas">
+            Administrar canchas
+            </Link>
+          )}
+
           {!usuario && (
             <Link className="btn btn-primary btn-lg" to="/cuenta/registro">
               Registrarte

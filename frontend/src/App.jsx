@@ -22,6 +22,7 @@ export default function App() {
       <Route path="/cuenta/registro" element={<Registro />} />
       <Route path="/cuenta/login" element={<Login />} />
       <Route path="/cuenta/datos" element={<MisDatos />} />
+      <Route path="/cuenta/canchas" element={<AdministrarCanchas />} />
     </Routes>
   );
 }
