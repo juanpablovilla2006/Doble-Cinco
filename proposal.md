@@ -6,8 +6,7 @@
 * 54689 Villa, Juan Pablo
 
 ### Repositorios
-* [frontend app](http://hyperlinkToGihubOrGitlab)
-* [backend app](http://hyperlinkToGihubOrGitlab)
+* Es un monorepo dentro de este mismo repositorio. La carpeta backend corresponde al backend. Lo mismo con la de front.
 
 ## Tema
 ### Descripción
