@@ -19,4 +19,21 @@ export function listarReservasDeUsuario(idUsuario) {
 export function eliminarReserva(id) {
   return pedir(`/reservas/${id}`, { metodo: "DELETE" });
 }
- 
+
+// GET /reservas/:id
+export function obtenerReserva(id) {
+  return pedir(`/reservas/${id}`);
+}
+
+// PUT /reservas/:id. Acepta cambios parciales, por ejemplo { visibilidad: true }
+export function actualizarReserva(id, datos) {
+  return pedir(`/reservas/${id}`, { metodo: "PUT", cuerpo: datos });
+}
+
+export function listarParticipantes(id) {
+  return pedir(`/reservas/${id}/participantes`);
+}
+
+export function quitarParticipante(id, idUsuario) {
+  return pedir(`/reservas/${id}/participantes/${idUsuario}`, { metodo: "DELETE" });
+}

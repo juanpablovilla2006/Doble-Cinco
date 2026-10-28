@@ -7,3 +7,16 @@ export function fechaMaximaDeNacimiento() {
   limite.setFullYear(limite.getFullYear() - EDAD_MINIMA);
   return limite.toISOString().slice(0, 10);
 }
+
+// Pone más linda la fecha, pasa de un string de fecha a una fecha con día en oración
+export function formatearDia(dia) {
+  return new Date(`${dia}T12:00:00`).toLocaleDateString("es-AR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+}
+
+// "18:00:00" -> "18:00"
+export const formatearHora = (hora) => hora.slice(0, 5);

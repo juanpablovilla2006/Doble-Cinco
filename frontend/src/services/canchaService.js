@@ -15,3 +15,7 @@ export function actualizarCancha(numero, datos) {
 export function eliminarCancha(numero) {
   return pedir(`/canchas/${numero}`, { metodo: "DELETE" });
 }
+
+export function obtenerCancha(numero) {
+  return pedir(`/canchas/${numero}`);
+}

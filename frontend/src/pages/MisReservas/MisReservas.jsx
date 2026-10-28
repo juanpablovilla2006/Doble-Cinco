@@ -4,6 +4,7 @@ import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import { useUsuario } from "../../hooks/useUsuario.js";
 import { listarReservasDeUsuario, eliminarReserva } from "../../services/reservaService.js";
 import "./MisReservas.css";
+import { formatearDia, formatearHora } from "../../utils/fechas.js";
 
 const ETIQUETA_ESTADO = {
   pendiente: "bg-warning text-dark",
@@ -11,30 +12,16 @@ const ETIQUETA_ESTADO = {
   cancelada: "bg-danger"
 };
 
-// "2026-11-03" -> "martes 3 de noviembre de 2026". Se arma con hora fija para evitar corrimientos por zona horaria
-function formatearDia(dia) {
-  return new Date(`${dia}T12:00:00`).toLocaleDateString("es-AR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
-}
-
-// "18:00:00" -> "18:00"
-const formatearHora = (hora) => hora.slice(0, 5);
-
 export default function MisReservas() {
   const { usuario } = useUsuario();
   const [reservas, setReservas] = useState([]);
-  const [cargando, setCargando] = useState(true);
+  const [cargando, setCargando] = useState(Boolean(usuario));
   const [mensaje, setMensaje] = useState(null);
   const [confirmandoId, setConfirmandoId] = useState(null);
   const [borrandoId, setBorrandoId] = useState(null);
 
   useEffect(() => {
     if (!usuario) {
-      setCargando(false);
       return;
     }
 
@@ -131,15 +118,12 @@ export default function MisReservas() {
                     </div>
                   </div>
                 ) : (
-                  <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm mt-3"
-                    onClick={() => setConfirmandoId(reserva.id)}
-                    disabled={borrandoId !== null}
-                  >
-                    Eliminar reserva
-                  </button>
-                )}
+                    <div className="d-flex gap-2 mt-3">
+                      <Link className="btn btn-primary btn-sm" to={`/mis-reservas/${reserva.id}`}> Ver reserva</Link>
+                      <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => setConfirmandoId(reserva.id)} disabled={borrandoId !== null}> Eliminar reserva
+                      </button>
+                    </div>
+                  )}
               </div>
             </li>
           ))}

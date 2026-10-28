@@ -1,0 +1,23 @@
+.equipo-item {
+  border-left: 6px solid var(--color-primario);
+}
+
+.equipo-item__nombre {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.equipo-item__cantidad {
+  margin: 8px 0;
+  color: #555;
+}
+
+.equipo-item__integrante {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-top: 1px solid #eee;
+}

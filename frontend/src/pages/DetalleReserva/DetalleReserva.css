@@ -1,0 +1,30 @@
+.detalle-reserva {
+  max-width: 640px;
+}
+
+.detalle-reserva__volver {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.detalle-reserva__resumen {
+  border-left: 6px solid var(--color-primario);
+}
+
+.detalle-reserva__resumen--cancelada {
+  border-left-color: #9e2222;
+  opacity: 0.75;
+}
+
+.detalle-reserva__dia {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.detalle-reserva__datos {
+  margin: 0;
+  color: #555;
+  text-transform: capitalize;
+}

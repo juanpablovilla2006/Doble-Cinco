@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login.jsx";
 import MisDatos from "./pages/MisDatos/MisDatos.jsx";
 import AdministrarCanchas from "./pages/AdministrarCanchas/AdministrarCanchas.jsx";
 import RutaAdmin from "./components/RutaAdmin/RutaAdmin.jsx";
+import DetalleReserva from "./pages/DetalleReserva/DetalleReserva.jsx";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Route path="/cuenta/registro" element={<Registro />} />
       <Route path="/cuenta/login" element={<Login />} />
       <Route path="/cuenta/datos" element={<MisDatos />} />
+      <Route path="/mis-reservas/:id" element={<DetalleReserva />} />
     </Routes>
   );
 }
