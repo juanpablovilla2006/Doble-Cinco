@@ -1,4 +1,4 @@
-.btn-primary-azul{
+.btn-primary-azul {
   background-color: #0d6efd;
   color: #fff;
 }
@@ -6,4 +6,50 @@
 .btn-primary-azul:hover {
   background-color: #0947a3;
   color: #fff;
+}
+
+/* Lista de canchas: mismo ancho que la tarjeta y mismo estilo que .tarjeta-item */
+.administrar__canchas {
+  max-width: 1520px;
+  margin: 0 auto 16px;
+  padding: 0;
+}
+
+.administrar__canchas > * {
+  background-color: var(--item-fondo);
+  color: #fff;
+  border: 1px solid var(--tarjeta-borde);
+  border-left: 4px solid var(--color-primario);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --bs-card-bg: transparent;
+  --bs-card-color: #fff;
+}
+
+/* Si CanchaItem trae una .card adentro, que no dibuje otro fondo ni otro borde */
+.administrar__canchas > * > .card {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: inherit;
+}
+
+/* Botones y avisos rojos sobre la tarjeta oscura */
+.tarjeta .btn-outline-danger {
+  background-color: #b3261e;
+  color: #fff;
+  border-color: transparent;
+}
+
+.tarjeta .btn-outline-danger:hover,
+.tarjeta .btn-danger:hover {
+  background-color: #8d8989;
+  color: #fff;
+  border-color: #8d8989;
+}
+
+.tarjeta .alert-danger {
+  background-color: rgba(158, 34, 34, 0.35);
+  color: #ffd6d6;
+  border-color: rgba(196, 58, 58, 0.6);
 }

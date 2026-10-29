@@ -8,15 +8,6 @@
   list-style: none;
 }
 
-.mis-reservas__item {
-  border-left: 6px solid var(--color-primario);
-}
-
-.mis-reservas__item--cancelada {
-  border-left-color: #9e2222;
-  opacity: 0.75;
-}
-
 .mis-reservas__dia {
   margin: 0;
   font-size: 1.1rem;
@@ -26,5 +17,12 @@
 
 .mis-reservas__datos {
   margin: 0;
-  color: #555;
+  color: #bdbdbd;
+}
+
+/* Aviso de confirmación de borrado, más sobrio sobre la tarjeta oscura */
+.tarjeta-item .alert-danger {
+  background-color: rgba(158, 34, 34, 0.35);
+  color: #ffd6d6;
+  border-color: rgba(196, 58, 58, 0.6);
 }

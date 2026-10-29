@@ -1,16 +1,138 @@
 :root {
-  --color-primario: #0DBA60;
-  --bs-primary: #0DBA60;
-  --bs-primary-rgb: 13, 186, 96;
+  --color-primario: #1fe00f;
+  --bs-primary: #1fe00f;
+  --bs-primary-rgb: 31, 224, 15;
+
+  --tarjeta-fondo: rgba(30, 30, 30, 0.88);
+  --item-fondo: rgba(58, 58, 58, 0.9);
+  --tarjeta-borde: #5a5a5a;
 }
 
-/* Bootstrap no toma --bs-primary en los botones*/
+/* Bootstrap no toma --bs-primary en los botones */
 .btn-primary {
+  --bs-btn-color: #0a0a0a;
+  --bs-btn-hover-color: #0a0a0a;
+  --bs-btn-active-color: #0a0a0a;
   --bs-btn-bg: var(--color-primario);
   --bs-btn-border-color: var(--color-primario);
-  --bs-btn-hover-bg: #0aa755;
-  --bs-btn-hover-border-color: #0aa755;
-  --bs-btn-active-bg: #099a4e;
-  --bs-btn-active-border-color: #099a4e;
-  --bs-btn-focus-shadow-rgb: 13, 186, 96;
+  --bs-btn-hover-bg: #19c20c;
+  --bs-btn-hover-border-color: #19c20c;
+  --bs-btn-active-bg: #15a80a;
+  --bs-btn-active-border-color: #15a80a;
+  --bs-btn-focus-shadow-rgb: 31, 224, 15;
+}
+
+body {
+  background-image: url("./assets/imagenes/Fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #f1f1f1;
+}
+
+.text-muted {
+  color: #b8b8b8 !important;
+}
+
+/* Contenedor grande: formularios y menús */
+.tarjeta {
+  max-width: 520px;
+  margin: 32px auto;
+  padding: 28px 24px;
+  background-color: var(--tarjeta-fondo);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(31, 224, 15, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+/* Tarjeta chica: cada elemento de una lista */
+.tarjeta-item {
+  padding: 16px;
+  background-color: var(--item-fondo);
+  color: #fff;
+  border: 1px solid var(--tarjeta-borde);
+  border-left: 4px solid var(--color-primario);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.tarjeta-item--cancelada {
+  border-left-color: #c43a3a;
+  opacity: 0.7;
+}
+
+/* Campos grises dentro de la tarjeta */
+.tarjeta label,
+.tarjeta .form-label,
+.tarjeta .form-check-label {
+  color: #e6e6e6;
+}
+
+.tarjeta .form-control,
+.tarjeta .form-select {
+  background-color: #3a3a3a;
+  color: #fff;
+  border-color: var(--tarjeta-borde);
+}
+
+.tarjeta .form-control:focus,
+.tarjeta .form-select:focus {
+  background-color: #444;
+  color: #fff;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 0.2rem rgba(31, 224, 15, 0.25);
+}
+
+.tarjeta .form-control:disabled,
+.tarjeta .form-select:disabled {
+  background-color: #2b2b2b;
+  color: #8a8a8a;
+  cursor: not-allowed;
+}
+
+.tarjeta option {
+  background-color: #3a3a3a;
+  color: #fff;
+}
+
+.tarjeta .form-control[type="date"] {
+  color-scheme: dark;
+}
+
+/* Enlaces legibles sobre la tarjeta oscura (el azul de Bootstrap casi no se lee) */
+.tarjeta a:not(.btn) {
+  color: var(--color-primario);
+}
+
+/* Texto de ayuda dentro de los campos */
+.tarjeta .form-control::placeholder {
+  color: #d6d2d2;
+}
+
+.card {
+  --bs-card-bg: var(--item-fondo);
+  --bs-card-color: #fff;
+  --bs-card-title-color: #fff;
+  --bs-card-border-color: var(--tarjeta-borde);
+  --bs-card-cap-bg: transparent;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.card .card-title,
+.card .card-text,
+.card .card-body {
+  color: #fff;
+}
+
+/* Lista de canchas, centrada y con el ancho de .tarjeta */
+.lista-canchas {
+  max-width: 1520px;
+  margin: 0 auto 16px;
+  padding: 0;
 }

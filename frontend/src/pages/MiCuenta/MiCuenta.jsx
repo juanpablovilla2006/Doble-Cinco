@@ -10,7 +10,7 @@ export default function MiCuenta() {
     <>
       <BarraMenu titulo="Mi cuenta" />
       <main className="container py-4">
-        <div className="mi-cuenta__acciones">
+        <div className="mi-cuenta__acciones tarjeta">
           {usuario && <p className="mi-cuenta__saludo">Hola, {usuario.nombre}</p>}
 
           {!usuario && (

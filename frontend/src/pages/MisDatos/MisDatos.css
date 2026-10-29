@@ -1,6 +1,6 @@
+/* La caja (fondo, borde, sombra, padding) viene de .tarjeta en index.css */
 .mis-datos__formulario {
-  max-width: 480px;
-  margin: 0 auto;
+  max-width: 520px;
 }
 
 .mis-datos__acciones {
@@ -8,26 +8,36 @@
   gap: 12px;
 }
 
+/* Cuando no se está editando, los campos tienen que seguir leyéndose bien */
+.mis-datos__formulario .form-control:disabled,
+.mis-datos__formulario .form-select:disabled {
+  background-color: #333;
+  color: #f1f1f1;
+}
+
 .mis-datos__peligro {
   margin-top: 48px;
   padding-top: 24px;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #5a5a5a;
 }
 
-.btn-danger:hover {
-    background-color: #8d8989;
-    color: #fff;
-    border-color: #8d8989;
+/* Botones de eliminar: limitados a esta tarjeta para no afectar otras pantallas */
+.mis-datos__formulario .btn-outline-danger {
+  background-color: #b3261e;
+  color: #fff;
+  border-color: transparent;
 }
 
-.btn-outline-danger:hover {
-  background-color: #8d8989;
+.mis-datos__formulario .btn-danger:hover,
+.mis-datos__formulario .btn-outline-danger:hover {
+  background-color: #ff0000;
   color: #fff;
   border-color: #8d8989;
 }
 
-.btn-outline-danger{
-    background-color: rgba(158, 34, 34, 0.877);
-    color: #fff;
-    border-color: transparent;
-  }
+/* Aviso de confirmación de borrado, más sobrio sobre fondo oscuro */
+.mis-datos__formulario .alert-danger {
+  background-color: rgba(158, 34, 34, 0.35);
+  color: #ffd6d6;
+  border-color: rgba(196, 58, 58, 0.6);
+}

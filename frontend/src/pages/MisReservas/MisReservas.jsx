@@ -51,7 +51,7 @@ export default function MisReservas() {
     return (
       <>
         <BarraMenu titulo="Mis reservas" />
-        <main className="container py-4 text-center">
+        <main className="container py-4 text-center mis-reservas__pantalla">
           <p>Iniciá sesión para ver tus reservas.</p>
           <Link className="btn btn-primary" to="/cuenta/login">Iniciar sesión</Link>
         </main>
@@ -62,7 +62,7 @@ export default function MisReservas() {
   return (
     <>
       <BarraMenu titulo="Mis reservas" />
-      <main className="container py-4">
+      <main className="container py-4 mis-reservas__pantalla">
         {mensaje && <div className={`alert alert-${mensaje.tipo}`} role="alert">{mensaje.texto}</div>}
 
         {cargando && <p className="text-center">Cargando reservas...</p>}
@@ -78,7 +78,7 @@ export default function MisReservas() {
           {reservas.map((reserva) => (
             <li
               key={reserva.id}
-              className={`card mis-reservas__item ${reserva.estado_reserva === "cancelada" ? "mis-reservas__item--cancelada" : ""}`}
+              className={`tarjeta-item ${reserva.estado_reserva === "cancelada" ? "tarjeta-item--cancelada" : ""}`}
             >
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-start gap-2">

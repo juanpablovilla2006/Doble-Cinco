@@ -5,6 +5,8 @@ import * as usuarioRepository from "../repositories/usuario.repository.js";
 import { AppError } from "../errors/AppError.js";
 import { DURACION_MINIMA, minutosEntre } from "../utils/horarios.js";
 
+export const DIAS_MAXIMOS_ANTICIPACION = 90;
+
 // trae el momento actual a la hora de la reserva
 function ahora() {
   const [dia, hora] = new Date()
@@ -19,6 +21,21 @@ function verificarFuturo(dia, horarioInicio, mensaje) {
     throw new AppError(400, mensaje);
   }
 }
+
+function fechaMaximaReserva() {
+  const limite = new Date(Date.now() + DIAS_MAXIMOS_ANTICIPACION * 24 * 60 * 60 * 1000);
+  return limite.toLocaleDateString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
+}
+
+function verificarDentroDelLimite(dia) {
+  if (dia > fechaMaximaReserva()) {
+    throw new AppError(
+      400,
+      `Solo se puede reservar con hasta ${DIAS_MAXIMOS_ANTICIPACION} días de anticipación`
+    );
+  }
+}
+
 async function obtenerCanchaHabilitada(numero) {
   const cancha = await canchaRepository.buscarPorNumero(numero);
 
@@ -61,7 +78,7 @@ export async function obtener(id) {
 export async function crear(datos) {
   
   verificarFuturo(datos.dia, datos.horario_inicio, "La reserva tiene que ser en una fecha y horario futuros");
-
+  verificarDentroDelLimite(datos.dia, "La reserva tiene que ser dentro del límite de anticipación permitido de 90 días");
   const creador = await usuarioRepository.buscarPorId(datos.id_creador);
 
   if (!creador) {
@@ -125,6 +142,14 @@ export async function actualizar(id, datos) {
     nueva.horario_inicio !== actual.horario_inicio ||
     nueva.horario_fin !== actual.horario_fin;
 
+  if (cambiaTurno) {
+  verificarFuturo(
+    nueva.dia,
+    nueva.horario_inicio,
+    "No se puede mover la reserva a una fecha y horario pasados"
+  );
+  verificarDentroDelLimite(nueva.dia);
+  }
   if (cambiaTurno && nueva.estado_reserva !== "cancelada") {
     await verificarTurnoLibre(nueva, id);
   }

@@ -1,3 +1,15 @@
+export .tarjeta {
+  max-width: 520px;
+  margin: 32px auto;
+  padding: 28px 24px;
+  background-color: rgba(30, 30, 30, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(31, 224, 15, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
 .reservar {
   max-width: 520px;
 }
@@ -24,18 +36,19 @@
   gap: 2px 12px;
   text-align: left;
   padding: 12px 16px;
-  background: #fff;
-  border: 2px solid #dee2e6;
+  background: #3a3a3a;
+  color: #fff;
+  border: 2px solid #5a5a5a;
   border-radius: 8px;
 }
- 
+
 .reservar__cancha:hover {
-  border-color: var(--color-primario);
+  border-color: #1fe00f;
 }
- 
+
 .reservar__cancha--activa {
-  border-color: var(--color-primario);
-  background: rgba(13, 186, 96, 0.08);
+  border-color: #1fe00f;
+  background: rgba(31, 224, 15, 0.12);
 }
  
 .reservar__confirmar {

@@ -35,7 +35,7 @@ export default function Login() {
     <>
       <BarraMenu titulo="Iniciar sesión" />
       <main className="container py-4">
-        <form className="login__formulario" onSubmit={enviar}>
+        <form className="login__formulario tarjeta" onSubmit={enviar}>
           {error && <div className="alert alert-danger">{error}</div>}
 
           <CampoFormulario etiqueta="Mail" nombre="mail" tipo="email" valor={mail} onChange={(e) => setMail(e.target.value)} required placeholder="Tú mail" />

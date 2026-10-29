@@ -141,10 +141,11 @@ export default function AdministrarCanchas() {
         {cargando && <p>Cargando canchas...</p>}
         {!cargando && canchas.length === 0 && <p>No hay canchas cargadas.</p>}
 
-        <ul className="list-unstyled d-flex flex-column gap-3">
+        <ul className="list-unstyled d-flex flex-column gap-3 administrar__canchas">
           {canchas.map((cancha) => <CanchaItem key={cancha.numero} cancha={cancha} />)}
         </ul>
 
+        <div className="tarjeta">
         <div className="d-flex flex-wrap gap-2 my-4">
           <button type="button" className="btn btn-primary" onClick={() => elegirAccion("crear")} disabled={cargando || guardando || borrando}>
             Crear nueva cancha
@@ -211,6 +212,7 @@ export default function AdministrarCanchas() {
             )}
           </section>
         )}
+        </div>
       </main>
     </>
   );

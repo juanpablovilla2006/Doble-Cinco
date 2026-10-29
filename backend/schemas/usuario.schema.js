@@ -1,11 +1,18 @@
 import { z } from "zod";
 
+const EDAD_MAXIMA = 100;
 const EDAD_MINIMA = 14;
-const hoy = () => new Date().toISOString().slice(0, 10);
-
+const hoy = () => new Date().toLocaleDateString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
+//limite de edad para registrarse, (superior) en formato YYYY-MM-DD 
 function fechaLimiteNacimiento() {
   const limite = new Date();
   limite.setFullYear(limite.getFullYear() - EDAD_MINIMA);
+  return limite.toISOString().slice(0, 10);
+}
+//limite de edad para registrarse, (inferior) en formato YYYY-MM-DD
+function fechaLimiteAntiguedad(){
+  const limite = new Date();
+  limite.setFullYear(limite.getFullYear() - EDAD_MAXIMA);
   return limite.toISOString().slice(0, 10);
 }
 

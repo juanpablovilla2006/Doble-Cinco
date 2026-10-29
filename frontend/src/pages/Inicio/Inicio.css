@@ -1,0 +1,56 @@
+/* Títulos de sección */
+.inicio__seccion {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b8b8b8;
+  margin-bottom: 12px;
+}
+
+/* La tarjeta ya viene de .tarjeta-item (index.css): acá solo lo propio de esta pantalla */
+.inicio__reserva {
+  height: 100%;
+}
+
+.inicio__reserva p {
+  margin: 0;
+}
+
+.inicio__fecha {
+  font-size: 0.85rem;
+  color: #bdbdbd;
+}
+
+.inicio__cancha {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 4px !important;
+}
+
+.inicio__precio {
+  margin-top: 8px !important;
+  font-weight: 700;
+  color: var(--color-primario);
+}
+
+/* Canchas: mismo aspecto que .tarjeta-item sin tocar CanchaItem */
+.inicio__canchas > li,
+.inicio__canchas .card {
+  background-color: var(--item-fondo);
+  color: #fff;
+  border: 1px solid var(--tarjeta-borde);
+  border-left: 4px solid var(--color-primario);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.inicio__vermas {
+  font-size: 0.9rem;
+  color: var(--color-primario);
+  text-decoration: none;
+}
+
+.inicio__vermas:hover {
+  text-decoration: underline;
+}

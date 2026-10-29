@@ -1,8 +1,8 @@
+/* La caja (fondo, borde, sombra, ancho) viene de .tarjeta en index.css */
 .mi-cuenta__acciones {
   display: grid;
   gap: 16px;
   max-width: 420px;
-  margin: 0 auto;
 }
 
 .mi-cuenta__saludo {
@@ -10,16 +10,28 @@
   text-align: center;
   font-size: 1.25rem;
   font-weight: 700;
+  color: #fff;
 }
 
-.btn-outline-secondary {
-  background-color: rgba(158, 34, 34, 0.877);
+/* Botón de cerrar sesión: limitado a esta tarjeta para no afectar los "Cancelar" de otras pantallas */
+.mi-cuenta__acciones .btn-outline-secondary {
+  background-color: #b3261e;
   color: #fff;
   border-color: transparent;
 }
 
-.btn-outline-secondary:hover {
-  background-color: #8d8989;
+.mi-cuenta__acciones .btn-outline-secondary:hover {
+  background-color: #ff0000;
   color: #fff;
   border-color: #8d8989;
+}
+
+.btn-outline-secondary {
+  color: #d0d0d0;
+  border-color: #8a8a8a;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #8a8a8a;
+  color: #fff;
 }

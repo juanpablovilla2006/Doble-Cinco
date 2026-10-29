@@ -6,7 +6,7 @@ import { useUsuario } from "../../hooks/useUsuario.js";
 import { registrarUsuario } from "../../services/usuarioService.js";
 import "./Registro.css";
 import { fechaMaximaDeNacimiento } from "../../utils/fechas.js";
-
+import { fechaMinimaDeNacimiento } from "../../utils/fechas.js";  
 const GENEROS = ["Hombre", "Mujer", "Otro"];
 
 const DATOS_INICIALES = {
@@ -69,14 +69,14 @@ export default function Registro() {
     <>
       <BarraMenu titulo="Registrarte" />
       <main className="container py-4">
-        <form className="registro__formulario" onSubmit={enviar}>
+        <form className="registro__formulario tarjeta" onSubmit={enviar}>
           {errorGeneral && <div className="alert alert-danger">{errorGeneral}</div>}
 
           <CampoFormulario etiqueta="Nombre" nombre="nombre" valor={datos.nombre} onChange={cambiar} error={errores.nombre} required maxLength={50} placeholder="Tú nombre" />
           <CampoFormulario etiqueta="Apellido" nombre="apellido" valor={datos.apellido} onChange={cambiar} error={errores.apellido} required maxLength={50} placeholder="Tú apellido"/>
           <CampoFormulario etiqueta="DNI" nombre="dni" valor={datos.dni} onChange={cambiar} error={errores.dni} required inputMode="numeric" maxLength={10} placeholder="XXXXXXXX" />
           <CampoFormulario etiqueta="Mail" nombre="mail" tipo="email" valor={datos.mail} onChange={cambiar} error={errores.mail} required maxLength={100} placeholder="tumail@gmail.com"/>
-          <CampoFormulario etiqueta="Fecha de nacimiento" nombre="fecha_nac" tipo="date" valor={datos.fecha_nac} onChange={cambiar} error={errores.fecha_nac} required max={fechaMaximaDeNacimiento()} />
+          <CampoFormulario etiqueta="Fecha de nacimiento" nombre="fecha_nac" tipo="date" valor={datos.fecha_nac} onChange={cambiar} error={errores.fecha_nac} required max={fechaMaximaDeNacimiento()} min={fechaMinimaDeNacimiento()} />
           <CampoFormulario etiqueta="Género" nombre="genero" tipo="select" opciones={GENEROS} valor={datos.genero} onChange={cambiar} error={errores.genero} required />
           <CampoFormulario etiqueta="Teléfono" nombre="telefono" tipo="tel" valor={datos.telefono} onChange={cambiar} error={errores.telefono} required placeholder="341 XXX XXXX"/>
           <CampoFormulario etiqueta="Descripción (opcional)" nombre="descripcion" tipo="textarea" valor={datos.descripcion} onChange={cambiar} error={errores.descripcion} maxLength={200} placeholder="Me gusta jugar a la pelota"/>

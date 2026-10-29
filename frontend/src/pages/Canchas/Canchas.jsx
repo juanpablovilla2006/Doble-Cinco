@@ -18,7 +18,7 @@ export default function Canchas() {
       <BarraMenu titulo="Nuestras canchas" />
       <main className="container py-4">
         {error && <p className="text-danger">{error}</p>}
-        <ul className="list-unstyled d-flex flex-column gap-3">
+        <ul className="list-unstyled d-flex flex-column gap-3 lista-canchas">
           {canchas.map((cancha) => (
             <CanchaItem key={cancha.numero} cancha={cancha} />
           ))}

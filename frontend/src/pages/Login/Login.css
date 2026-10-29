@@ -1,9 +1,9 @@
+/* La caja (fondo, borde, sombra, padding) viene de .tarjeta en index.css */
 .login__formulario {
   max-width: 480px;
-  margin: 0 auto;
 }
 
 .login__pie {
-  margin-top: 16px;
+  margin: 16px 0 0;
   text-align: center;
 }

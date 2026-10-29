@@ -113,7 +113,7 @@ export default function MisDatos() {
     <>
       <BarraMenu titulo="Mis datos" />
       <main className="container py-4">
-        <div className="mis-datos__formulario">
+        <div className="mis-datos__formulario tarjeta">
           {mensaje && <div className={`alert alert-${mensaje.tipo}`}>{mensaje.texto}</div>}
 
           {!datos && !mensaje && <p>Cargando tus datos...</p>}

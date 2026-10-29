@@ -1,5 +1,6 @@
 .barra-menu {
-  background-color: var(--color-primario);
+  background-color: #1e1e1e;
+  border-bottom: 5px solid #1fe00f;
   color: #fff;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -10,10 +11,7 @@
 
 .barra-menu__titulo {
   margin: 0;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 2.3rem;
+  line-height: 0;
 }
 
 .barra-menu__acciones {
@@ -21,4 +19,11 @@
   align-items: center;
   justify-content: flex-end;
   gap: 24px;
+}
+
+.barra-menu__logo {
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+  display: block;
 }
