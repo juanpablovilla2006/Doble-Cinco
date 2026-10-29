@@ -41,3 +41,8 @@ export function listarParticipantes(id) {
 export function quitarParticipante(id, idUsuario) {
   return pedir(`/reservas/${id}/participantes/${idUsuario}`, { metodo: "DELETE" });
 }
+
+// El backend ya devuelve solo las reservas públicas si no se filtra por visibilidad ni creador
+export function listarReservasPublicas() {
+  return pedir("/reservas");
+}

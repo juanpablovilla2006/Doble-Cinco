@@ -22,6 +22,18 @@
   --bs-btn-focus-shadow-rgb: 31, 224, 15;
 }
 
+.btn-outline-primary {
+  --bs-btn-color: var(--color-primario);
+  --bs-btn-border-color: var(--color-primario);
+  --bs-btn-hover-color: #0a0a0a;
+  --bs-btn-hover-bg: var(--color-primario);
+  --bs-btn-hover-border-color: var(--color-primario);
+  --bs-btn-active-color: #0a0a0a;
+  --bs-btn-active-bg: #19c20c;
+  --bs-btn-active-border-color: #19c20c;
+  --bs-btn-focus-shadow-rgb: 31, 224, 15;
+}
+
 body {
   background-image: url("./assets/imagenes/Fondo.jpg");
   background-size: cover;
@@ -135,4 +147,21 @@ body {
   max-width: 1520px;
   margin: 0 auto 16px;
   padding: 0;
+}
+
+/* Menú desplegable de la barra */
+.dropdown-menu {
+  --bs-dropdown-bg: rgba(30, 30, 30, 0.95);
+  --bs-dropdown-color: #f1f1f1;
+  --bs-dropdown-border-color: rgba(31, 224, 15, 0.35);
+  --bs-dropdown-border-radius: 12px;
+  --bs-dropdown-link-color: #f1f1f1;
+  --bs-dropdown-link-hover-color: #0a0a0a;
+  --bs-dropdown-link-hover-bg: var(--color-primario);
+  --bs-dropdown-link-active-color: #0a0a0a;
+  --bs-dropdown-link-active-bg: var(--color-primario);
+  --bs-dropdown-divider-bg: #5a5a5a;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
