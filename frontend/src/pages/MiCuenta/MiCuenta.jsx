@@ -34,7 +34,7 @@ export default function MiCuenta() {
           </Link>
 
           {usuario && (
-            <button type="button" className="btn btn-outline-secondary btn-lg" onClick={cerrarSesion}>
+            <button type="button" className="btn btn-danger btn-lg" onClick={cerrarSesion}>
               Cerrar sesión
             </button>
           )}

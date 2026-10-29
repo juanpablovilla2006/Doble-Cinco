@@ -142,7 +142,7 @@ export default function MisDatos() {
                     <button key="guardar" type="submit" className="btn btn-primary" disabled={guardando}>
                       {guardando ? "Guardando..." : "Guardar cambios"}
                     </button>
-                    <button key="cancelar" type="button" className="btn btn-outline-secondary" onClick={cancelar} disabled={guardando}>
+                    <button key="cancelar" type="button" className="btn btn-secondary" onClick={cancelar} disabled={guardando}>
                       Cancelar
                     </button>
                   </>
@@ -165,13 +165,13 @@ export default function MisDatos() {
                   <button type="button" className="btn btn-danger" onClick={borrarCuenta}>
                     Sí, eliminar mi cuenta
                   </button>
-                  <button type="button" className="btn btn-outline-secondary" onClick={() => setConfirmandoBorrado(false)}>
+                  <button type="button" className="btn btn-secondary" onClick={() => setConfirmandoBorrado(false)}>
                     Cancelar
                   </button>
                 </div>
               </div>
             ) : (
-              <button type="button" className="btn btn-outline-danger" onClick={() => setConfirmandoBorrado(true)}>
+              <button type="button" className="btn btn-danger" onClick={() => setConfirmandoBorrado(true)}>
                 Eliminar mi cuenta
               </button>
             )}

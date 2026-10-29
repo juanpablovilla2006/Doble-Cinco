@@ -19,19 +19,3 @@
   color: #fff;
   border-color: transparent;
 }
-
-.mi-cuenta__acciones .btn-outline-secondary:hover {
-  background-color: #ff0000;
-  color: #fff;
-  border-color: #8d8989;
-}
-
-.btn-outline-secondary {
-  color: #d0d0d0;
-  border-color: #8a8a8a;
-}
-
-.btn-outline-secondary:hover {
-  background-color: #8a8a8a;
-  color: #fff;
-}

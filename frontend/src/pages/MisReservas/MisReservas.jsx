@@ -120,7 +120,7 @@ export default function MisReservas() {
                 ) : (
                     <div className="d-flex gap-2 mt-3">
                       <Link className="btn btn-primary btn-sm" to={`/mis-reservas/${reserva.id}`}> Ver reserva</Link>
-                      <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => setConfirmandoId(reserva.id)} disabled={borrandoId !== null}> Eliminar reserva
+                      <button type="button" className="btn btn-danger btn-sm" onClick={() => setConfirmandoId(reserva.id)} disabled={borrandoId !== null}> Eliminar reserva
                       </button>
                     </div>
                   )}

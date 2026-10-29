@@ -11,6 +11,10 @@ export function buscarCanchasDisponibles({ dia, horario_inicio, horario_fin, tip
 export function crearReserva(datos) {
   return pedir("/reservas", { metodo: "POST", cuerpo: datos });
 }
+
+export function listarReservasPublicas() {
+  return pedir("/reservas?visibilidad=true");
+}
  
 export function listarReservasDeUsuario(idUsuario) {
   return pedir(`/reservas?id_creador=${idUsuario}`);

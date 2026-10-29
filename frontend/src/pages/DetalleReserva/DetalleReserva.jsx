@@ -236,7 +236,7 @@ export default function DetalleReserva() {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-outline-secondary btn-sm"
+                            className="btn btn-secondary btn-sm"
                             onClick={() => setConfirmandoCancelacion(false)}
                             disabled={cancelando}
                           >
@@ -247,7 +247,7 @@ export default function DetalleReserva() {
                     ) : (
                       <button
                         type="button"
-                        className="btn btn-outline-danger btn-sm mt-3"
+                        className="btn btn-danger btn-sm mt-3"
                         onClick={() => setConfirmandoCancelacion(true)}
                         disabled={cambiandoVisibilidad}
                       >
@@ -291,7 +291,7 @@ export default function DetalleReserva() {
                           </button>
                           <button
                             type="button"
-                            className="btn btn-outline-secondary btn-sm"
+                            className="btn btn-secondary btn-sm"
                             onClick={() => setConfirmandoQuitarId(null)}
                             disabled={quitandoId === participante.id}
                           >
@@ -301,7 +301,7 @@ export default function DetalleReserva() {
                       ) : (
                         <button
                           type="button"
-                          className="btn btn-outline-danger btn-sm"
+                          className="btn btn-danger btn-sm"
                           onClick={() => setConfirmandoQuitarId(participante.id)}
                           disabled={quitandoId !== null}
                         >
