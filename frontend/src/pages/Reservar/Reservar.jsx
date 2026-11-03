@@ -122,7 +122,7 @@ export default function Reservar() {
               <Link className="btn btn-primary btn-lg" to="/cuenta/login">
                 Iniciar sesión
               </Link>
-              <Link className="btn btn-outline-primary btn-lg" to="/cuenta/registro">
+              <Link className="btn btn-primary btn-lg" to="/cuenta/registro">
                 Registrarte
               </Link>
             </div>
