@@ -108,7 +108,7 @@ export default function EquipoItem({ equipo,idReserva,disponibles,puedeGestionar
                 <button type="submit" className="btn btn-primary btn-sm">
                   {ocupado ? "Guardando..." : "Guardar"}
                 </button>
-                <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setEditando(false)}>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={() => setEditando(false)}>
                   Cancelar
                 </button>
               </div>
@@ -119,10 +119,10 @@ export default function EquipoItem({ equipo,idReserva,disponibles,puedeGestionar
             <h3 className="equipo-item__nombre">{equipo.tipo}</h3>
             {puedeGestionar && !confirmandoBorrado && (
               <div className="d-flex gap-2">
-                <button type="button" className="btn btn-outline-secondary btn-sm" onClick={empezarEdicion} disabled={ocupado}>
+                <button type="button" className="btn btn-secondary btn-sm" onClick={empezarEdicion} disabled={ocupado}>
                   Renombrar
                 </button>
-                <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => setConfirmandoBorrado(true)} disabled={ocupado}>
+                <button type="button" className="btn btn-danger btn-sm" onClick={() => setConfirmandoBorrado(true)} disabled={ocupado}>
                   Eliminar
                 </button>
               </div>
@@ -137,7 +137,7 @@ export default function EquipoItem({ equipo,idReserva,disponibles,puedeGestionar
               <button type="button" className="btn btn-danger btn-sm" onClick={borrar} disabled={ocupado}>
                 {ocupado ? "Eliminando..." : "Sí, eliminar"}
               </button>
-              <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setConfirmandoBorrado(false)} disabled={ocupado}>
+              <button type="button" className="btn btn-secondary btn-sm" onClick={() => setConfirmandoBorrado(false)} disabled={ocupado}>
                 Cancelar
               </button>
             </div>
@@ -155,7 +155,7 @@ export default function EquipoItem({ equipo,idReserva,disponibles,puedeGestionar
             <li key={participante.id} className="equipo-item__integrante">
               <span>{participante.nombre} {participante.apellido}</span>
               {puedeGestionar && (
-                <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => quitar(participante.id)} disabled={ocupado}>
+                <button type="button" className="btn btn-danger btn-sm" onClick={() => quitar(participante.id)} disabled={ocupado}>
                   Quitar
                 </button>
               )}

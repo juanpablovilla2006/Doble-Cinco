@@ -5,6 +5,7 @@
 .detalle-reserva__volver {
   display: inline-block;
   margin-bottom: 16px;
+  color: #1fe00f;
 }
 
 .detalle-reserva__resumen {
