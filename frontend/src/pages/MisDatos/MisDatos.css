@@ -1,4 +1,5 @@
-/* La caja (fondo, borde, sombra, padding) viene de .tarjeta en index.css */
+/* La caja (fondo, borde, sombra, padding) viene de .tarjeta en index.css.
+   Los campos deshabilitados también se estilan ahí (variables --campo-off-*). */
 .mis-datos__formulario {
   max-width: 520px;
 }
@@ -8,17 +9,10 @@
   gap: 12px;
 }
 
-/* Cuando no se está editando, los campos tienen que seguir leyéndose bien */
-.mis-datos__formulario .form-control:disabled,
-.mis-datos__formulario .form-select:disabled {
-  background-color: #333;
-  color: #f1f1f1;
-}
-
 .mis-datos__peligro {
   margin-top: 48px;
   padding-top: 24px;
-  border-top: 1px solid #5a5a5a;
+  border-top: 1px solid var(--tarjeta-borde);
 }
 
 /* Botones de eliminar: limitados a esta tarjeta para no afectar otras pantallas */
@@ -35,9 +29,15 @@
   border-color: #8d8989;
 }
 
-/* Aviso de confirmación de borrado, más sobrio sobre fondo oscuro */
+/* Aviso de confirmación de borrado */
 .mis-datos__formulario .alert-danger {
   background-color: rgba(158, 34, 34, 0.35);
   color: #ffd6d6;
   border-color: rgba(196, 58, 58, 0.6);
+}
+
+[data-bs-theme="light"] .mis-datos__formulario .alert-danger {
+  background-color: rgba(179, 38, 30, 0.15);
+  color: #7a1c1c;
+  border-color: rgba(179, 38, 30, 0.5);
 }

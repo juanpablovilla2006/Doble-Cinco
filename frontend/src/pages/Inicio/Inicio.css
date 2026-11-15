@@ -4,7 +4,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b8b8b8;
+  color: var(--bs-secondary-color);
   margin-bottom: 12px;
 }
 
@@ -19,7 +19,7 @@
 
 .inicio__fecha {
   font-size: 0.85rem;
-  color: #bdbdbd;
+  color: var(--tarjeta-texto-suave);
 }
 
 .inicio__cancha {
@@ -31,23 +31,14 @@
 .inicio__precio {
   margin-top: 8px !important;
   font-weight: 700;
-  color: var(--color-primario);
+  color: var(--color-primario-texto);
 }
 
-/* Canchas: mismo aspecto que .tarjeta-item sin tocar CanchaItem */
-.inicio__canchas > li,
-.inicio__canchas .card {
-  background-color: var(--item-fondo);
-  color: #fff;
-  border: 1px solid var(--tarjeta-borde);
-  border-left: 4px solid var(--color-primario);
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
-}
+/* Las tarjetas de canchas ya se ven bien con .cancha-item (index.css y CanchaItem.css) */
 
 .inicio__vermas {
   font-size: 0.9rem;
-  color: var(--color-primario);
+  color: var(--color-primario-texto);
   text-decoration: none;
 }
 

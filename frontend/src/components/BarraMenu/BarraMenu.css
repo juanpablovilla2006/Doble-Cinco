@@ -27,3 +27,23 @@
   max-width: 100%;
   display: block;
 }
+
+.barra-menu__tema {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+
+.barra-menu__tema .bi {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.barra-menu__tema .form-check-input {
+  width: 2.8em;
+  height: 1.4em;
+  margin: 0;
+  cursor: pointer;
+}
