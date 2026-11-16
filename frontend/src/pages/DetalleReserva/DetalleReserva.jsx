@@ -13,6 +13,7 @@ import {
 } from "../../services/reservaService.js";
 import { listarEquipos, crearEquipo } from "../../services/equipoService.js";
 import { formatearDia, formatearHora } from "../../utils/fechas.js";
+import SolicitudesReserva from "../../components/SolicitudReserva/SolicitudesReserva.jsx";
 import "./DetalleReserva.css";
 
 const ETIQUETA_ESTADO = {
@@ -165,6 +166,12 @@ export default function DetalleReserva() {
     setEquipos((anteriores) => anteriores.filter((equipo) => equipo.id !== idEquipo));
   }
 
+  function recargarParticipantes() {
+  listarParticipantes(reserva.id)
+    .then(setParticipantes)
+    .catch((e) => setMensaje({ tipo: "danger", texto: e.message }));
+}
+
   if (!usuario) {
     return (
       <>
@@ -313,7 +320,13 @@ export default function DetalleReserva() {
                 ))}
               </ul>
             </section>
-
+            {puedeGestionar && (
+              <SolicitudesReserva
+                idReserva={reserva.id}
+                idUsuario={usuario.id}
+                onAceptada={recargarParticipantes}
+              />
+            )}
             <section className="mt-4">
               <h2 className="h5">Equipos ({equipos.length} de {MAX_EQUIPOS})</h2>
 

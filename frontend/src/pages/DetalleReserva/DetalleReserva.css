@@ -24,8 +24,14 @@
   text-transform: capitalize;
 }
 
-.detalle-reserva__datos {
+.mis-reservas__datos {
   margin: 0;
-  color: #ddd;
-  text-transform: capitalize;
+}
+
+[data-bs-theme="dark"] .mis-reservas__datos {
+  color: #fff;
+}
+
+[data-bs-theme="light"] .mis-reservas__datos {
+  color: #111;
 }

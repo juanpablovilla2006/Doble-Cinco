@@ -164,3 +164,49 @@ DELETE http://localhost:3000/reservas/1/equipos/3/participantes/2
 
 ### Sacar un participante de la reserva
 DELETE http://localhost:3000/reservas/1/participantes/2
+
+
+### Pedir unirse a una reserva pública (usuario 3, reserva 1)
+POST http://localhost:3000/reservas/1/solicitudes
+Content-Type: application/json
+
+{ "id_usuario": 3 }
+
+### Repetir la misma solicitud (409)
+POST http://localhost:3000/reservas/1/solicitudes
+Content-Type: application/json
+
+{ "id_usuario": 3 }
+
+### El creador (usuario 2) lista las pendientes
+GET http://localhost:3000/reservas/1/solicitudes?id_usuario=2&estado=pendiente
+
+### Otro usuario (4) lista: solo ve las suyas (lista vacía)
+GET http://localhost:3000/reservas/1/solicitudes?id_usuario=4
+
+### Alguien que no es el creador intenta aceptar (403)
+PUT http://localhost:3000/reservas/1/solicitudes/1
+Content-Type: application/json
+
+{ "id_usuario": 3, "estado": "aceptada" }
+
+### El creador acepta la solicitud 1
+PUT http://localhost:3000/reservas/1/solicitudes/1
+Content-Type: application/json
+
+{ "id_usuario": 2, "estado": "aceptada" }
+
+### Volver a resolverla (409, ya fue aceptada)
+PUT http://localhost:3000/reservas/1/solicitudes/1
+Content-Type: application/json
+
+{ "id_usuario": 2, "estado": "rechazada" }
+
+### Otro usuario intenta retirar una solicitud ajena (403)
+DELETE http://localhost:3000/reservas/1/solicitudes/2?id_usuario=4
+
+### El solicitante retira su solicitud pendiente
+DELETE http://localhost:3000/reservas/1/solicitudes/2?id_usuario=3
+
+### Reservas en las que participa el usuario 3 (creadas por él o donde lo aceptaron)
+GET http://localhost:3000/reservas?id_participante=3

@@ -13,7 +13,7 @@ export function crearReserva(datos) {
 }
  
 export function listarReservasDeUsuario(idUsuario) {
-  return pedir(`/reservas?id_creador=${idUsuario}`);
+  return pedir(`/reservas?id_participante=${idUsuario}`);
 }
  
 export function eliminarReserva(id) {

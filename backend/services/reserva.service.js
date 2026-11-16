@@ -59,7 +59,11 @@ async function verificarTurnoLibre(turno, excluirId) {
 }
 // filtra para que solo las reservas publicas puedan listarse
 export function listar(filtros) {
-  if (filtros.visibilidad === undefined && filtros.id_creador === undefined) {
+  if (
+    filtros.visibilidad === undefined &&
+    filtros.id_creador === undefined &&
+    filtros.id_participante === undefined
+  ) {
     filtros = { ...filtros, visibilidad: true };
   }
   return reservaRepository.listar(filtros);

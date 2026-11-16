@@ -24,6 +24,19 @@ export function listar(filtros = {}) {
   if (filtros.numero_cancha) condiciones.push(eq(reserva.numero_cancha, filtros.numero_cancha));
   if (filtros.id_creador) condiciones.push(eq(reserva.id_creador, filtros.id_creador));
 
+  //reservas en las que el usuario figura como participante
+  if (filtros.id_participante) {
+    condiciones.push(
+      inArray(
+        reserva.id,
+        db
+          .select({ id: reserva_participante.id_reserva })
+          .from(reserva_participante)
+          .where(eq(reserva_participante.id_usuario, filtros.id_participante))
+      )
+    );
+  }
+
   return db
     .select(columnasListado)
     .from(reserva)

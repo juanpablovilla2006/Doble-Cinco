@@ -4,6 +4,8 @@ import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import CanchaItem from "../../components/CanchaItem/CanchaItem.jsx";
 import { listarCanchas } from "../../services/canchaService.js";
 import { listarReservasPublicas } from "../../services/reservaService.js";
+import { useUsuario } from "../../hooks/useUsuario.js";
+import BotonSolicitud from "../../components/BotonSolicitud/BotonSolicitud.jsx";
 import "./Inicio.css";
 
 const CANTIDAD_RESERVAS = 3;
@@ -25,6 +27,7 @@ export default function Inicio() {
   const [canchas, setCanchas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const { usuario } = useUsuario();
 
   useEffect(() => {
     Promise.all([listarReservasPublicas(), listarCanchas()])
@@ -64,6 +67,9 @@ export default function Inicio() {
                         </p>
                         <p className="inicio__cancha">Cancha {r.numero_cancha}</p>
                         <p className="inicio__precio">${r.precio}</p>
+                        {usuario?.id !== r.id_creador && (
+                          <BotonSolicitud idReserva={r.id} idUsuario={usuario?.id} />
+                        )}
                       </article>
                     </div>
                   ))}

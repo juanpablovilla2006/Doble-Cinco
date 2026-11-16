@@ -70,7 +70,8 @@ export const filtrosReservaSchema = z.object({
     .transform((valor) => valor === "true")
     .optional(),
   numero_cancha: idPositivo("El número de cancha").optional(),
-  id_creador: idPositivo("El id del creador").optional()
+  id_creador: idPositivo("El id del creador").optional(),
+  id_participante: idPositivo("El id del participante").optional()
 });
 
 export const idParamSchema = z.object({
@@ -80,3 +81,4 @@ export const idParamSchema = z.object({
 export const participanteParamSchema = idParamSchema.extend({
   idUsuario: idPositivo("El id de usuario")
 });
+

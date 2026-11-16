@@ -43,9 +43,9 @@
 
 .tarjeta .btn-outline-danger:hover,
 .tarjeta .btn-danger:hover {
-  background-color: #8d8989;
+  background-color: #e01111d2;
   color: #fff;
-  border-color: #8d8989;
+  border-color: #8a898d;
 }
 
 .tarjeta .alert-danger {

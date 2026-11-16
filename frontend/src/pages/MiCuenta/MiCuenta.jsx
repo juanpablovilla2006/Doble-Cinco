@@ -25,7 +25,7 @@ export default function MiCuenta() {
             </Link>
           ) : (
             <Link className="btn btn-primary btn-lg" to="/cuenta/login">
-              Login
+              Iniciar sesión
             </Link>
           )}
 
