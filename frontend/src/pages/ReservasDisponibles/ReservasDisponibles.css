@@ -1,0 +1,30 @@
+.reservas-disponibles__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.reservas-disponibles__volver {
+  max-width: 640px;
+  margin: 0 auto 16px;
+}
+
+.reservas-disponibles__volver a {
+  color: var(--color-primario-texto);
+}
+
+.reservas-disponibles__dia {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.reservas-disponibles__datos {
+  margin: 0;
+  color: var(--tarjeta-texto);
+}

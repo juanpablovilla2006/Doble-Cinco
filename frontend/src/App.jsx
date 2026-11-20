@@ -10,6 +10,7 @@ import MisDatos from "./pages/MisDatos/MisDatos.jsx";
 import AdministrarCanchas from "./pages/AdministrarCanchas/AdministrarCanchas.jsx";
 import RutaAdmin from "./components/RutaAdmin/RutaAdmin.jsx";
 import DetalleReserva from "./pages/DetalleReserva/DetalleReserva.jsx";
+import ReservasDisponibles from "./pages/ReservasDisponibles/ReservasDisponibles.jsx";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
       <Route path="/cuenta/login" element={<Login />} />
       <Route path="/cuenta/datos" element={<MisDatos />} />
       <Route path="/mis-reservas/:id" element={<DetalleReserva />} />
+      <Route path="/reservas-disponibles" element={<ReservasDisponibles />} />
     </Routes>
   );
 }

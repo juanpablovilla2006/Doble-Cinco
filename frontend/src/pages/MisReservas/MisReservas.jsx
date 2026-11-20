@@ -63,6 +63,11 @@ export default function MisReservas() {
     <>
       <BarraMenu titulo="Mis reservas" />
       <main className="container py-4 mis-reservas__pantalla">
+          <div className="text-center mb-3">
+            <Link className="btn btn-primary" to="/reservas-disponibles">
+            Ver reservas disponibles
+          </Link>
+        </div>
         {mensaje && <div className={`alert alert-${mensaje.tipo}`} role="alert">{mensaje.texto}</div>}
 
         {cargando && <p className="text-center">Cargando reservas...</p>}
