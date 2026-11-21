@@ -1,0 +1,21 @@
+.chats__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.chats__dia {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.chats__datos {
+  margin: 0;
+  color: var(--tarjeta-texto);
+}

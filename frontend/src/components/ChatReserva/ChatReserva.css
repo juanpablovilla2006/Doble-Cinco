@@ -1,0 +1,73 @@
+
+.chat-reserva__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 65vh;
+  overflow-y: auto;
+  padding: 12px;
+  background-color: var(--item-fondo);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(31, 224, 15, 0.35);
+  border-radius: 12px;
+}
+
+.chat-reserva__mensaje {
+  align-self: flex-start;
+  max-width: 80%;
+  padding: 8px 12px;
+  background-color: var(--tarjeta-fondo);
+  color: var(--tarjeta-texto);
+  border: 1px solid var(--tarjeta-borde);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.chat-reserva__mensaje--propio {
+  align-self: flex-end;
+  background-color: var(--color-primario);
+  color: #0a0a0a;
+  border-color: var(--color-primario);
+  border-radius: 16px 16px 4px 16px;
+}
+
+.chat-reserva__autor {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primario-texto);
+}
+
+.chat-reserva__texto {
+  margin: 0;
+  /* Respeta mensajes largos sin romper el recuadro */
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.chat-reserva__hora {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  text-align: right;
+}
+
+.chat-reserva .chat-reserva__enviar {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #0d6efd;
+  --bs-btn-border-color: #0d6efd;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #0b5ed7;
+  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #0a58ca;
+  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #0d6efd;
+  --bs-btn-disabled-border-color: #0d6efd;
+  --bs-btn-disabled-opacity: 0.6;
+
+  background-color: #0d6efd;
+  border: 1px solid #0d6efd;
+  color: #fff;
+}

@@ -7,6 +7,7 @@ import equipoRoutes from "./routes/equipos.routes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import { z } from "zod";
 import solicitudRoutes from "./routes/solicitudes.routes.js";
+import mensajeRoutes from "./routes/mensajes.routes.js";
 
 z.config(z.locales.es());
 
@@ -23,6 +24,7 @@ app.use("/usuarios", usuarioRoutes);
 app.use("/reservas", reservaRoutes);
 app.use("/reservas/:idReserva/equipos", equipoRoutes);
 app.use("/reservas/:idReserva/solicitudes", solicitudRoutes);
+app.use("/reservas/:idReserva/mensajes", mensajeRoutes);
 app.use(errorHandler);
 
 app.listen(3000, () => {

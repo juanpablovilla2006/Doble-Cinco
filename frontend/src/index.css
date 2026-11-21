@@ -230,3 +230,20 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
+
+/* Título de sección con fondo, para que no se pierda sobre la imagen */
+.titulo-seccion {
+  display: inline-block;
+  padding: 6px 14px;
+  color: var(--tarjeta-texto);
+  border-left: 4px solid var(--color-primario);
+  border-radius: 8px;
+}
+
+[data-bs-theme="dark"] .titulo-seccion {
+  background-color: rgb(58, 58, 58);   /* sólido */
+}
+
+[data-bs-theme="light"] .titulo-seccion {
+  background-color: rgb(188, 188, 188);   /* sólido */
+}

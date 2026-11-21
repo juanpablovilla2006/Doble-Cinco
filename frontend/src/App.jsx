@@ -11,6 +11,9 @@ import AdministrarCanchas from "./pages/AdministrarCanchas/AdministrarCanchas.js
 import RutaAdmin from "./components/RutaAdmin/RutaAdmin.jsx";
 import DetalleReserva from "./pages/DetalleReserva/DetalleReserva.jsx";
 import ReservasDisponibles from "./pages/ReservasDisponibles/ReservasDisponibles.jsx";
+import Chats from "./pages/Chats/Chats.jsx";
+import ChatReservaPagina from "./pages/ChatReserva/ChatReservaPagina.jsx";
+
 
 export default function App() {
   return (
@@ -26,6 +29,8 @@ export default function App() {
       <Route path="/cuenta/datos" element={<MisDatos />} />
       <Route path="/mis-reservas/:id" element={<DetalleReserva />} />
       <Route path="/reservas-disponibles" element={<ReservasDisponibles />} />
+      <Route path="/chats" element={<Chats />} />
+      <Route path="/chats/:id" element={<ChatReservaPagina />} />
     </Routes>
   );
 }

@@ -1,0 +1,22 @@
+.chat-pagina {
+  max-width: 640px;
+}
+
+.chat-pagina__volver,
+.chat-pagina__detalle {
+  display: inline-block;
+  color: var(--color-primario-texto);
+}
+
+.chat-pagina__resumen {
+  margin: 0;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.chat-reserva .btn-primary:disabled {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+  color: #0a0a0a;
+  opacity: 0.5;
+}

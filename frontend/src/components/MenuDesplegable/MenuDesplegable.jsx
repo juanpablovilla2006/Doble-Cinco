@@ -9,7 +9,8 @@ const opciones = [
   { texto: "Canchas", ruta: "/canchas" },
   { texto: "Administrar Canchas", ruta: "/administrar-canchas", soloAdmin:true },
   { texto: "Reservar", ruta: "/reservar" },
-  { texto: "Mis reservas", ruta: "/mis-reservas" }
+  { texto: "Mis reservas", ruta: "/mis-reservas" },
+  { texto: "Chats", ruta: "/chats" }
 ];
 
 export default function MenuDesplegable() {

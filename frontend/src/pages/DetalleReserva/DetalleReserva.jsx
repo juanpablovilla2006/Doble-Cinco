@@ -188,7 +188,16 @@ export default function DetalleReserva() {
     <>
       <BarraMenu titulo="Detalle de reserva" />
       <main className="container py-4 detalle-reserva">
-        <Link className="detalle-reserva__volver" to="/mis-reservas">Volver a mis reservas</Link>
+        <div className="d-flex flex-wrap gap-2 mb-3">
+          <Link className="btn btn-secondary btn-sm" to="/mis-reservas">
+            Volver a mis reservas
+          </Link>
+          {reserva && (
+          <Link className="btn btn-primary btn-sm" to={`/chats/${reserva.id}`}>
+            Ir al chat
+          </Link>
+          )}
+        </div>
 
         {mensaje && <div className={`alert alert-${mensaje.tipo}`} role="alert">{mensaje.texto}</div>}
 
@@ -265,7 +274,7 @@ export default function DetalleReserva() {
               </div>
             </section>
 
-            <section className="mt-4">
+            <section className="tarjeta-item mt-4">
               <h2 className="h5">
                 Participantes{cancha && ` (${participantes.length} de ${cancha.capacidad})`}
               </h2>
@@ -327,7 +336,7 @@ export default function DetalleReserva() {
                 onAceptada={recargarParticipantes}
               />
             )}
-            <section className="mt-4">
+            <section className="tarjeta-item mt-4">
               <h2 className="h5">Equipos ({equipos.length} de {MAX_EQUIPOS})</h2>
 
               {equipos.length === 0 && <p>Todavía no hay equipos en esta reserva.</p>}

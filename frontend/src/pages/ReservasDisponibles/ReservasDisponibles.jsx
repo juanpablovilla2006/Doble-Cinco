@@ -59,7 +59,7 @@ export default function ReservasDisponibles() {
       <BarraMenu titulo="Reservas disponibles" />
       <main className="container py-4">
         <div className="reservas-disponibles__volver">
-          <Link to="/mis-reservas">Volver a mis reservas</Link>
+          <Link className="btn btn-primary btn-sm" to="/mis-reservas">Volver a mis reservas</Link>
         </div>
 
         {error && <div className="alert alert-danger" role="alert">{error}</div>}

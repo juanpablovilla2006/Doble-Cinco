@@ -34,7 +34,7 @@ export default function SolicitudesReserva({ idReserva, idUsuario, onAceptada })
   }
 
   return (
-    <section className="mt-4">
+    <section className="tarjeta-item mt-4">
       <h2 className="h5">Solicitudes pendientes ({solicitudes.length})</h2>
 
       {error && <div className="alert alert-danger" role="alert">{error}</div>}
