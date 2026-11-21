@@ -59,6 +59,7 @@ export default function ChatReservaPagina() {
             <ChatReserva
               idReserva={reserva.id}
               idUsuario={usuario.id}
+              esCreador={reserva.id_creador === usuario.id}
               cancelada={reserva.estado_reserva === "cancelada"}
             />
 

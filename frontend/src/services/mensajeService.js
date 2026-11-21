@@ -14,3 +14,7 @@ export function listarMensajes(idReserva, idUsuario, despuesDe) {
 export function enviarMensaje(idReserva, idUsuario, contenido) {
   return pedir(ruta(idReserva), { metodo: "POST", cuerpo: { id_usuario: idUsuario, contenido } });
 }
+
+export function eliminarMensaje(idReserva, id, idUsuario) {
+  return pedir(`${ruta(idReserva)}/${id}?id_usuario=${idUsuario}`, { metodo: "DELETE" });
+}

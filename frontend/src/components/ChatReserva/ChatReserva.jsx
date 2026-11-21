@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { listarMensajes, enviarMensaje } from "../../services/mensajeService.js";
+import { useEffect, useRef, useState } from "react";
+import { listarMensajes, enviarMensaje, eliminarMensaje } from "../../services/mensajeService.js";
 import "./ChatReserva.css";
 
 const CADA_CUANTO_ACTUALIZAR = 5000; // ms
@@ -14,37 +14,26 @@ function formatearMomento(fecha) {
   });
 }
 
-// Chat de la reserva. Se actualiza solo cada pocos segundos.
-// cancelada: la reserva está cancelada, el chat queda en solo lectura
-export default function ChatReserva({ idReserva, idUsuario, cancelada }) {
+export default function ChatReserva({ idReserva, idUsuario, esCreador, cancelada }) {
   const [mensajes, setMensajes] = useState([]);
   const [texto, setTexto] = useState("");
   const [cargando, setCargando] = useState(true);
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState("");
+  const [abierto, setAbierto] = useState(null); // NUEVO
 
-  const ultimoId = useRef(0);
   const lista = useRef(null);
-
-  // Suma mensajes sin repetir ninguno (un refresco y un envío pueden traer el mismo)
-  const agregar = useCallback((nuevos) => {
-    if (nuevos.length === 0) return;
-
-    setMensajes((anteriores) => {
-      const ids = new Set(anteriores.map((m) => m.id));
-      return [...anteriores, ...nuevos.filter((m) => !ids.has(m.id))];
-    });
-    ultimoId.current = Math.max(ultimoId.current, ...nuevos.map((m) => m.id));
-  }, []);
 
   useEffect(() => {
     let activo = true;
 
     async function cargar() {
       try {
-        const nuevos = await listarMensajes(idReserva, idUsuario, ultimoId.current || undefined);
+        //sin el tercer parámetro, trae la lista completa
+        const actuales = await listarMensajes(idReserva, idUsuario);
         if (!activo) return;
-        agregar(nuevos);
+        //reemplaza la lista en vez de agregar
+        setMensajes(actuales);
         setError("");
       } catch (e) {
         if (activo) setError(e.message);
@@ -60,9 +49,10 @@ export default function ChatReserva({ idReserva, idUsuario, cancelada }) {
       activo = false;
       clearInterval(intervalo);
     };
-  }, [idReserva, idUsuario, agregar]);
+    //sin `agregar` en las dependencias
+  }, [idReserva, idUsuario]);
 
-  // Al llegar mensajes nuevos, baja la lista hasta el último
+  // Al llegar mensajes nuevos, baja la lista hasta el último (igual que antes)
   useEffect(() => {
     if (lista.current) {
       lista.current.scrollTop = lista.current.scrollHeight;
@@ -78,7 +68,10 @@ export default function ChatReserva({ idReserva, idUsuario, cancelada }) {
 
     try {
       const nuevo = await enviarMensaje(idReserva, idUsuario, texto);
-      agregar([nuevo]);
+      //evita repetirlo si el refresco ya lo trajo
+      setMensajes((anteriores) =>
+        anteriores.some((m) => m.id === nuevo.id) ? anteriores : [...anteriores, nuevo]
+      );
       setTexto("");
     } catch (e) {
       setError(e.message);
@@ -86,6 +79,20 @@ export default function ChatReserva({ idReserva, idUsuario, cancelada }) {
       setEnviando(false);
     }
   }
+
+  // Tocar un mensaje (si podés borrarlo) muestra u oculta sus puntitos
+
+  async function borrar(id) {
+  setError("");
+  try {
+    await eliminarMensaje(idReserva, id, idUsuario);
+    setMensajes((anteriores) => anteriores.filter((m) => m.id !== id));
+  } catch (e) {
+    setError(e.message);
+  } finally {
+    setAbierto(null);
+  }
+}
 
   return (
     <section className="mt-4 chat-reserva">
@@ -99,14 +106,64 @@ export default function ChatReserva({ idReserva, idUsuario, cancelada }) {
 
         {mensajes.map((mensaje) => {
           const propio = mensaje.id_usuario === idUsuario;
+          const puedeBorrar = !cancelada && (propio || esCreador);
+          const seleccionado = abierto?.id === mensaje.id;
 
           return (
-            <div key={mensaje.id} className={`chat-reserva__mensaje ${propio ? "chat-reserva__mensaje--propio" : ""}`}>
+            <div
+              key={mensaje.id}
+              className={`chat-reserva__mensaje ${propio ? "chat-reserva__mensaje--propio" : ""} ${puedeBorrar ? "chat-reserva__mensaje--clicable" : ""}`}
+            >
               {!propio && (
                 <span className="chat-reserva__autor">{mensaje.nombre} {mensaje.apellido}</span>
               )}
               <p className="chat-reserva__texto">{mensaje.contenido}</p>
               <span className="chat-reserva__hora">{formatearMomento(mensaje.fecha_enviado)}</span>
+
+              {puedeBorrar && (
+                <button
+                  type="button"
+                  className={`chat-reserva__puntos ${seleccionado ? "chat-reserva__puntos--activo" : ""}`}
+                  aria-label="Opciones del mensaje"
+                  onClick={() => setAbierto(seleccionado ? null : { id: mensaje.id, paso: "menu" })}
+              >
+                <i className="bi bi-three-dots"></i>
+              </button>
+              )}
+              
+              
+              {puedeBorrar && seleccionado && (
+                <div className="chat-reserva__opciones" onClick={(evento) => evento.stopPropagation()}>
+                  {abierto.paso === "puntos" && (
+                    <button
+                      type="button"
+                      className="chat-reserva__puntos"
+                      aria-label="Opciones del mensaje"
+                      onClick={() => setAbierto({ id: mensaje.id, paso: "menu" })}
+                    >
+                      <i className="bi bi-three-dots"></i>
+                    </button>
+                  )}
+
+                  {abierto.paso === "menu" && (
+                    <button
+                      type="button"
+                      className="chat-reserva__opcion"
+                      onClick={() => setAbierto({ id: mensaje.id, paso: "confirmar" })}
+                    >
+                      Borrar mensaje
+                    </button>
+                  )}
+
+                  {abierto.paso === "confirmar" && (
+                    <div className="chat-reserva__confirmar">
+                      <span className="chat-reserva__pregunta">¿Borrar?</span>
+                      <button type="button" className="chat-reserva__si" onClick={() => borrar(mensaje.id)}>Sí</button>
+                      <button type="button" className="chat-reserva__no" onClick={() => setAbierto(null)}>No</button>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}

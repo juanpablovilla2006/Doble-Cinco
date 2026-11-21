@@ -14,12 +14,13 @@
 
 .chat-reserva__mensaje {
   align-self: flex-start;
-  max-width: 80%;
+  max-width: 70%;
   padding: 8px 12px;
   background-color: var(--tarjeta-fondo);
   color: var(--tarjeta-texto);
   border: 1px solid var(--tarjeta-borde);
   border-radius: 16px 16px 16px 4px;
+  position: relative;
 }
 
 .chat-reserva__mensaje--propio {
@@ -70,4 +71,89 @@
   background-color: #0d6efd;
   border: 1px solid #0d6efd;
   color: #fff;
+}
+
+/* Deja lugar a la derecha para que los puntitos no tapen el texto */
+.chat-reserva__mensaje--borrable {
+  padding-right: 32px;
+}
+
+.chat-reserva__puntos {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  padding: 0 6px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  font-size: 1.1rem;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+/* Aparecen al pasar el cursor por el mensaje, al enfocar con teclado o con el menú abierto */
+.chat-reserva__mensaje:hover .chat-reserva__puntos,
+.chat-reserva__puntos:focus-visible,
+.chat-reserva__puntos--activo {
+  opacity: 1;
+}
+
+.chat-reserva__puntos:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.chat-reserva .chat-reserva__opcion {
+  padding: 4px 10px;
+  background-color: #b3261e;
+  border: 0.1px solid #443b3ba6;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.chat-reserva .chat-reserva__opcion:hover {
+  background-color: #e01111;
+}
+
+.chat-reserva__confirmar {
+  display: inline-flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 0.1px solid #443b3ba6;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.chat-reserva__confirmar > * {
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+}
+
+/* Líneas finas que separan los segmentos */
+.chat-reserva__confirmar > * + * {
+  border-left: 0,5px solid #443b3ba6;
+}
+
+.chat-reserva__pregunta {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.chat-reserva .chat-reserva__si {
+  background-color: #b3261e;
+}
+
+.chat-reserva .chat-reserva__si:hover {
+  background-color: #e01111;
+}
+
+.chat-reserva .chat-reserva__no {
+  background-color: #6c757d;
+}
+
+.chat-reserva .chat-reserva__no:hover {
+  background-color: #5a6268;
 }

@@ -32,3 +32,22 @@ export async function crear(idReserva, { id_usuario, contenido }) {
   const id = await mensajeRepository.crear({ id_chat: idReserva, id_usuario, contenido });
   return mensajeRepository.buscarPorId(id);
 }
+
+export async function eliminar(idReserva, id, idActor) {
+  const reserva = await reservaService.obtener(idReserva);
+  const mensaje = await mensajeRepository.buscarPorIdYChat(id, idReserva);
+
+  if (!mensaje) {
+    throw new AppError(404, "No existe ese mensaje en el chat");
+  }
+
+  if (mensaje.id_usuario !== idActor && reserva.id_creador !== idActor) {
+    throw new AppError(403, "Solo el autor o el creador de la reserva pueden borrar el mensaje");
+  }
+
+  if (reserva.estado_reserva === "cancelada") {
+    throw new AppError(409, "La reserva está cancelada, el chat quedó en solo lectura");
+  }
+
+  await mensajeRepository.eliminar(id);
+}

@@ -21,4 +21,13 @@ export const filtrosMensajeSchema = z.object({
   despues_de: idPositivo("El id del mensaje").optional()
 });
 
+export const mensajeParamSchema = reservaParamSchema.extend({
+  id: idPositivo("El id de mensaje")
+});
+
+// Para DELETE (sin body): quién hace el pedido va en la query
+export const actorQuerySchema = z.object({
+  id_usuario: idPositivo("El id de usuario")
+});
+
 export { reservaParamSchema };

@@ -210,3 +210,9 @@ DELETE http://localhost:3000/reservas/1/solicitudes/2?id_usuario=3
 
 ### Reservas en las que participa el usuario 3 (creadas por él o donde lo aceptaron)
 GET http://localhost:3000/reservas?id_participante=3
+
+### El autor borra su mensaje
+DELETE http://localhost:3000/reservas/1/mensajes/3?id_usuario=2
+
+### Un tercero intenta borrarlo (403)
+DELETE http://localhost:3000/reservas/1/mensajes/3?id_usuario=9

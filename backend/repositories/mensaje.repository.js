@@ -42,3 +42,15 @@ export async function crear(datos) {
   const [resultado] = await db.insert(mensaje).values(datos);
   return resultado.insertId;
 }
+
+export async function buscarPorIdYChat(id, idChat) {
+  const [fila] = await db
+    .select({ id: mensaje.id, id_usuario: mensaje.id_usuario })
+    .from(mensaje)
+    .where(and(eq(mensaje.id, id), eq(mensaje.id_chat, idChat)));
+  return fila ?? null;
+}
+
+export async function eliminar(id) {
+  await db.delete(mensaje).where(eq(mensaje.id, id));
+}
