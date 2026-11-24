@@ -1,6 +1,7 @@
 import * as mensajeRepository from "../repositories/mensaje.repository.js";
 import * as reservaRepository from "../repositories/reserva.repository.js";
 import * as reservaService from "./reserva.service.js";
+import * as notificacionService from "./notificacion.service.js";
 import { AppError } from "../errors/AppError.js";
 
 // Solo los participantes de la reserva (el creador incluido) pueden leer y escribir
@@ -15,6 +16,8 @@ async function verificarParticipante(idReserva, idUsuario) {
 export async function listar(idReserva, { id_usuario, despues_de }) {
   await reservaService.obtener(idReserva);
   await verificarParticipante(idReserva, id_usuario);
+  // Si está leyendo el chat, sus avisos de mensajes de esta reserva ya no hacen falta
+  await notificacionService.limpiarAvisosDeMensajes(idReserva, id_usuario);
 
   return mensajeRepository.listar(idReserva, despues_de);
 }
@@ -30,6 +33,7 @@ export async function crear(idReserva, { id_usuario, contenido }) {
   }
 
   const id = await mensajeRepository.crear({ id_chat: idReserva, id_usuario, contenido });
+  await notificacionService.avisarMensaje(reserva, id_usuario);
   return mensajeRepository.buscarPorId(id);
 }
 

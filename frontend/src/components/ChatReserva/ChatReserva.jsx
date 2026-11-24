@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { listarMensajes, enviarMensaje, eliminarMensaje } from "../../services/mensajeService.js";
 import "./ChatReserva.css";
 
-const CADA_CUANTO_ACTUALIZAR = 5000; // ms
+const CADA_CUANTO_ACTUALIZAR = 1000; // ms
 const LARGO_MAXIMO = 500;
 
 function formatearMomento(fecha) {

@@ -9,7 +9,7 @@ import {
 } from "../../services/notificacionService.js";
 import "./Notificaciones.css";
 
-const CADA_CUANTO_ACTUALIZAR = 10000; // ms
+const CADA_CUANTO_ACTUALIZAR = 1500; // ms
 
 // A dónde lleva cada tipo de aviso
 function destino(notificacion) {
