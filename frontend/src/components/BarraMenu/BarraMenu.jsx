@@ -1,6 +1,6 @@
 import "./BarraMenu.css";
 import MenuDesplegable from "../MenuDesplegable/MenuDesplegable.jsx";
-import iconoCampana from "../../assets/imagenes/icono-campana.png";
+import Notificaciones from "../Notificaciones/Notificaciones.jsx";
 import iconoCuenta from "../../assets/imagenes/icono-cuenta.png";
 import logo from "../../assets/imagenes/LogoBarraMenu.png";
 import { Link } from "react-router";
@@ -42,9 +42,7 @@ export default function BarraMenu({ titulo, conLogo = false }) {
           <i className="bi bi-moon-stars-fill" aria-hidden="true"></i>
         </div>
 
-        <button type="button" className="btn p-0 border-0" aria-label="Notificaciones">
-          <img src={iconoCampana} alt="" height="38" />
-        </button>
+        <Notificaciones />
 
         <Link to="/cuenta" aria-label="Mi cuenta">
           <img src={iconoCuenta} alt="" height="42" />

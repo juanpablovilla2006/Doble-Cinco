@@ -3,6 +3,7 @@ import * as reservaRepository from "../repositories/reserva.repository.js";
 import * as canchaRepository from "../repositories/cancha.repository.js";
 import * as usuarioRepository from "../repositories/usuario.repository.js";
 import * as reservaService from "./reserva.service.js";
+import * as notificacionService from "./notificacion.service.js";
 import { AppError } from "../errors/AppError.js";
 
 // Carga la reserva (404 si no existe) y la solicitud, verificando que sea de esa reserva
@@ -115,9 +116,12 @@ export async function resolver(idReserva, id, { estado, id_usuario }) {
 
     await verificarCapacidad(reserva, participantes);
     await solicitudRepository.aceptar(id, idReserva, solicitud.id_usuario);
-  } else {
+    await notificacionService.avisarAceptacion(reserva, solicitud.id_usuario);
+    } 
+  else {
     await solicitudRepository.cambiarEstado(id, estado);
-  }
+    await notificacionService.avisarRechazo(reserva, solicitud.id_usuario);
+  } 
 
   const { solicitud: actualizada } = await cargar(idReserva, id);
   return actualizada;

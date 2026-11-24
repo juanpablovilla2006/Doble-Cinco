@@ -1,0 +1,65 @@
+.notificaciones__boton {
+  position: relative;
+}
+
+/* Globito rojo con la cantidad de avisos */
+.notificaciones__punto {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #f1f1f1;
+  border: 2px solid #1e1e1e;
+  border-radius: 50%;
+}
+
+.notificaciones__menu {
+  width: 320px;
+  max-width: 90vw;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.notificaciones__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-bottom: 1px solid #5a5a5a;
+  color: #f1f1f1;
+}
+
+.notificaciones__limpiar {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-primario);
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+.notificaciones__vacio {
+  margin: 0;
+  padding: 12px 16px;
+  color: #d6d2d2;
+  font-size: 0.9rem;
+}
+
+.notificaciones__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Los textos largos se parten en varias líneas */
+.notificaciones__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: normal;
+}
+
+.notificaciones__item small {
+  opacity: 0.7;
+}
