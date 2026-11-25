@@ -136,6 +136,11 @@ export default function Reservar() {
     <>
       <BarraMenu titulo="Reservar" />
       <main className="container py-4">
+        <div className="text-center mb-3">
+          <Link className="btn btn-primary" to="/reservas-disponibles">
+            Ver reservas disponibles
+          </Link>
+        </div>
         <div className="tarjeta reservar">
           {reservaCreada && (
             <div className="alert alert-success">

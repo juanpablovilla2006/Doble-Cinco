@@ -10,6 +10,7 @@ const opciones = [
   { texto: "Administrar Canchas", ruta: "/administrar-canchas", soloAdmin:true },
   { texto: "Reservar", ruta: "/reservar" },
   { texto: "Mis reservas", ruta: "/mis-reservas" },
+  { texto: "Reservas disponibles", ruta: "/reservas-disponibles" },
   { texto: "Chats", ruta: "/chats" }
 ];
 

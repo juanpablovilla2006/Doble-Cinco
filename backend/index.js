@@ -27,8 +27,8 @@ app.use("/reservas", reservaRoutes);
 app.use("/reservas/:idReserva/equipos", equipoRoutes);
 app.use("/reservas/:idReserva/solicitudes", solicitudRoutes);
 app.use("/reservas/:idReserva/mensajes", mensajeRoutes);
-app.use(errorHandler);
 app.use("/notificaciones", notificacionRoutes);
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log("Servidor andando en http://localhost:3000");
