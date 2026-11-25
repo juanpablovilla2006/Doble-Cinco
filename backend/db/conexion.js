@@ -10,4 +10,6 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME
 });
 
+pool.on("connection", (conexion) => conexion.query("SET time_zone = '+00:00'"));
+
 export const db = drizzle({ client: pool });

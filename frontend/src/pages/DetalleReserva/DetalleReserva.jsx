@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import CampoFormulario from "../../components/CampoFormulario/CampoFormulario.jsx";
 import EquipoItem from "../../components/EquipoItem/EquipoItem.jsx";
@@ -26,6 +26,7 @@ const MAX_EQUIPOS = 2;
 
 export default function DetalleReserva() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { usuario } = useUsuario();
 
   const [reserva, setReserva] = useState(null);
@@ -40,6 +41,8 @@ export default function DetalleReserva() {
   const [quitandoId, setQuitandoId] = useState(null);
   const [confirmandoCancelacion, setConfirmandoCancelacion] = useState(false);
   const [cancelando, setCancelando] = useState(false);
+  const [confirmandoAbandono, setConfirmandoAbandono] = useState(false);
+  const [abandonando, setAbandonando] = useState(false);
 
   const [nombreEquipo, setNombreEquipo] = useState("");
   const [errorEquipo, setErrorEquipo] = useState("");
@@ -64,6 +67,10 @@ export default function DetalleReserva() {
   // Solo el creador puede modificar la reserva, y no si está cancelada
   const esCreador = Boolean(usuario && reserva && usuario.id === reserva.id_creador);
   const puedeGestionar = esCreador && reserva.estado_reserva !== "cancelada";
+
+  // Un participante que no es el creador puede abandonar mientras la reserva siga activa
+  const esParticipante = Boolean(usuario) && participantes.some((p) => p.id === usuario.id);
+  const puedeAbandonar = esParticipante && !esCreador && reserva?.estado_reserva !== "cancelada";
 
   // Participantes que todavía no están en ningún equipo
   const idsConEquipo = new Set(equipos.flatMap((equipo) => equipo.participantes.map((p) => p.id)));
@@ -110,6 +117,20 @@ export default function DetalleReserva() {
     setConfirmandoCancelacion(false);
   }
 }
+
+  async function abandonar() {
+    setMensaje(null);
+    setAbandonando(true);
+
+    try {
+      await quitarParticipante(reserva.id, usuario.id);
+      navigate("/mis-reservas");
+    } catch (error) {
+      setMensaje({ tipo: "danger", texto: error.message });
+      setAbandonando(false);
+      setConfirmandoAbandono(false);
+    }
+  }
 
   async function quitar(idUsuario) {
     setMensaje(null);
@@ -271,6 +292,34 @@ export default function DetalleReserva() {
                       </button>
                     )
                 )}
+                {puedeAbandonar && (
+                confirmandoAbandono ? (
+                  <div className="alert alert-danger mt-3 mb-0">
+                    <p>¿Seguro que querés abandonar esta reserva? También abandonás tu equipo. Para volver a entrar vas a tener que pedir unirte de nuevo.</p>
+                    <div className="d-flex gap-2">
+                      <button type="button" className="btn btn-danger btn-sm" onClick={abandonar} disabled={abandonando}>
+                        {abandonando ? "Abandonando..." : "Sí, abandonar reserva"}
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => setConfirmandoAbandono(false)}
+                        disabled={abandonando}
+                      >
+                        Volver
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-danger btn-sm mt-3"
+                    onClick={() => setConfirmandoAbandono(true)}
+                  >
+                    Abandonar reserva
+                  </button>
+                )
+              )}
               </div>
             </section>
 
