@@ -135,7 +135,7 @@
 
 /* Líneas finas que separan los segmentos */
 .chat-reserva__confirmar > * + * {
-  border-left: 0,5px solid #443b3ba6;
+  border-left: 0.5px solid #443b3ba6;
 }
 
 .chat-reserva__pregunta {
