@@ -4,6 +4,7 @@ import { AppError } from "../errors/AppError.js";
 
 // Valores de notificacion.tipo (la columna es un varchar libre)
 export const TIPOS_NOTIFICACION = {
+  SOLICITUD: "solicitud_nueva",
   ACEPTADO: "solicitud_aceptada",
   RECHAZADO: "solicitud_rechazada",
   MENSAJE: "mensaje"
@@ -45,6 +46,18 @@ export async function eliminar(id, idActor) {
 
 export async function eliminarTodas(idUsuario) {
   await notificacionRepository.eliminarTodasDelUsuario(idUsuario);
+}
+
+// Alguien pidió unirse a la reserva: se le avisa al creador (RN 31)
+export function avisarSolicitud(reserva, solicitante) {
+  return sinRomper(() =>
+    notificacionRepository.crear({
+      tipo: TIPOS_NOTIFICACION.SOLICITUD,
+      descripcion: `${solicitante.nombre} ${solicitante.apellido} pidió unirse a tu reserva ${describirReserva(reserva)}`,
+      id_usuario: reserva.id_creador,
+      id_reserva: reserva.id
+    })
+  );
 }
 
 // Al usuario lo aceptaron en una reserva

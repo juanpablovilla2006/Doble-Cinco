@@ -92,6 +92,7 @@ export async function crear(idReserva, { id_usuario }) {
   await verificarCapacidad(reserva, participantes);
 
   const id = await solicitudRepository.crear({ id_reserva: idReserva, id_usuario });
+  await notificacionService.avisarSolicitud(reserva, usuario);
   const { solicitud } = await cargar(idReserva, id);
   return solicitud;
 }
