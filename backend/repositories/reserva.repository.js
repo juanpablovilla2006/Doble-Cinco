@@ -1,4 +1,4 @@
-import { and, asc, eq, getTableColumns, gt, inArray, lt, ne } from "drizzle-orm";
+import { and, asc, eq, getTableColumns, gt, inArray, lt, ne, sql } from "drizzle-orm";
 import { db } from "../db/conexion.js";
 import {
   reserva,
@@ -16,8 +16,8 @@ import {
 const { codigo_invitacion, ...columnasListado } = getTableColumns(reserva);
 
 export function listar(filtros = {}) {
-  const condiciones = [];
 
+  const condiciones = [];
   if (filtros.dia) condiciones.push(eq(reserva.dia, filtros.dia));
   if (filtros.estado_reserva) condiciones.push(eq(reserva.estado_reserva, filtros.estado_reserva));
   if (filtros.visibilidad !== undefined) condiciones.push(eq(reserva.visibilidad, filtros.visibilidad));
@@ -38,10 +38,10 @@ export function listar(filtros = {}) {
   }
 
   return db
-    .select(columnasListado)
-    .from(reserva)
-    .where(and(...condiciones))
-    .orderBy(asc(reserva.dia), asc(reserva.horario_inicio));
+  .select({...columnasListado, cantidad_participantes: sql`(select count(*) from reserva_participante rp where rp.id_reserva = reserva.id)`.mapWith(Number)})
+  .from(reserva)
+  .where(and(...condiciones))
+  .orderBy(asc(reserva.dia), asc(reserva.horario_inicio));
 }
 
 export async function buscarPorId(id) {

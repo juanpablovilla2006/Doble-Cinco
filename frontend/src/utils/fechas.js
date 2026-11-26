@@ -38,3 +38,9 @@ export function fechaLimiteReserva() {
   limite.setDate(limite.getDate() + DIAS_MAXIMOS_ANTICIPACION);
   return limite.toLocaleDateString("sv-SE");
 }
+
+export function esFutura(reserva) {
+  const ahora = new Date().toLocaleString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
+  const [dia, hora] = ahora.split(" ");
+  return reserva.dia > dia || (reserva.dia === dia && reserva.horario_inicio > hora);
+}

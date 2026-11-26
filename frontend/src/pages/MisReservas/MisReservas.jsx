@@ -83,9 +83,14 @@ export default function MisReservas() {
               <div className="card-body">
                 <div className="d-flex justify-content-between align-items-start gap-2">
                   <p className="mis-reservas__dia">{formatearDia(reserva.dia)}</p>
-                  <span className={`badge ${ETIQUETA_ESTADO[reserva.estado_reserva] ?? "bg-secondary"}`}>
-                    {reserva.estado_reserva}
-                  </span>
+                  <div className="d-flex flex-wrap justify-content-end gap-1">
+                    <span className={`badge ${reserva.id_creador === usuario.id ? "bg-primary text-dark" :  "bg-info text-dark"}`}>
+                      {reserva.id_creador === usuario.id ? "Creada por vos" : "Te uniste"}
+                    </span>
+                    <span className={`badge ${ETIQUETA_ESTADO[reserva.estado_reserva] ?? "bg-secondary" } `}>
+                      {reserva.estado_reserva}
+                    </span>
+                  </div>
                 </div>
 
                 <p className="mis-reservas__datos">

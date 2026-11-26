@@ -25,3 +25,14 @@
   margin: 0;
   color: var(--tarjeta-texto);
 }
+
+.reservas-disponibles__filtros {
+  max-width: 640px;
+  margin: 0 auto 16px;
+}
+
+.reservas-disponibles__cupo {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--tarjeta-texto-suave);
+}

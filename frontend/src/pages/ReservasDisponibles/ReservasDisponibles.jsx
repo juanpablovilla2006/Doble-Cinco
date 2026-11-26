@@ -1,46 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import BotonSolicitud from "../../components/BotonSolicitud/BotonSolicitud.jsx";
 import { useUsuario } from "../../hooks/useUsuario.js";
-import { listarCanchas } from "../../services/canchaService.js";
-import { listarReservasPublicas, listarReservasDeUsuario } from "../../services/reservaService.js";
-import { formatearDia, formatearHora } from "../../utils/fechas.js";
+import { useReservasDisponibles } from "../../hooks/useReservasDisponibles.js";
+import { textoCupo } from "../../utils/cupo.js";
+import { fechaLimiteReserva, fechaMinimaReserva, formatearDia, formatearHora } from "../../utils/fechas.js";
 import "./ReservasDisponibles.css";
-
-// Misma comparación que usa Inicio: la reserva todavía no empezó (hora de Argentina)
-function esFutura(reserva) {
-  const ahora = new Date().toLocaleString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
-  const [dia, hora] = ahora.split(" ");
-  return reserva.dia > dia || (reserva.dia === dia && reserva.horario_inicio > hora);
-}
 
 export default function ReservasDisponibles() {
   const { usuario } = useUsuario();
-  const [reservas, setReservas] = useState([]);
-  const [cargando, setCargando] = useState(Boolean(usuario));
-  const [error, setError] = useState(null);
+  const { reservas, cargando, error } = useReservasDisponibles();
+  const [filtros, setFiltros] = useState({ dia: "", tipo: "" });
 
-  useEffect(() => {
-    if (!usuario) {
-      return;
-    }
+  const tipos = [...new Set(reservas.map((r) => r.tipo).filter(Boolean))];
+  const filtradas = reservas.filter(
+    (r) => (!filtros.dia || r.dia === filtros.dia) && (!filtros.tipo || r.tipo === filtros.tipo)
+  );
 
-    Promise.all([listarReservasPublicas(), listarReservasDeUsuario(usuario.id), listarCanchas()])
-      .then(([publicas, propias, canchas]) => {
-        // Se descartan las reservas en las que el usuario ya participa (incluye las que creó)
-        const idsPropias = new Set(propias.map((reserva) => reserva.id));
-        const tipos = new Map(canchas.map((cancha) => [cancha.numero, cancha.tipo]));
-
-        setReservas(
-          publicas
-            .filter((r) => r.estado_reserva !== "cancelada" && esFutura(r) && !idsPropias.has(r.id))
-            .map((r) => ({ ...r, tipo: tipos.get(r.numero_cancha) }))
-        );
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setCargando(false));
-  }, [usuario]);
+  function cambiarFiltro(e) {
+    setFiltros((anteriores) => ({ ...anteriores, [e.target.name]: e.target.value }));
+  }
 
   if (!usuario) {
     return (
@@ -62,12 +42,52 @@ export default function ReservasDisponibles() {
         {error && <div className="alert alert-danger" role="alert">{error}</div>}
         {cargando && <p className="text-center">Cargando reservas...</p>}
 
+        {!cargando && !error && reservas.length > 0 && (
+          <form className="reservas-disponibles__filtros row g-2 align-items-end">
+            <div className="col-12 col-sm-5">
+              <label className="form-label" htmlFor="dia">Día</label>
+              <input
+                id="dia"
+                name="dia"
+                type="date"
+                className="form-control"
+                min={fechaMinimaReserva()}
+                max={fechaLimiteReserva()}
+                value={filtros.dia}
+                onChange={cambiarFiltro}
+              />
+            </div>
+            <div className="col-12 col-sm-5">
+              <label className="form-label" htmlFor="tipo">Tipo de cancha</label>
+              <select id="tipo" name="tipo" className="form-select" value={filtros.tipo} onChange={cambiarFiltro}>
+                <option value="">Cualquiera</option>
+                {tipos.map((t) => (
+                  <option key={t} value={t}>{t}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-12 col-sm-2">
+              <button
+                type="button"
+                className="btn btn-secondary w-100"
+                onClick={() => setFiltros({ dia: "", tipo: "" })}
+              >
+                Limpiar
+              </button>
+            </div>
+          </form>
+        )}
+
         {!cargando && !error && reservas.length === 0 && (
           <p className="text-center">No hay reservas públicas a las que te puedas unir por el momento.</p>
         )}
 
+        {!cargando && reservas.length > 0 && filtradas.length === 0 && (
+          <p className="text-center">Ninguna reserva coincide con los filtros elegidos.</p>
+        )}
+
         <ul className="reservas-disponibles__lista">
-          {reservas.map((reserva) => (
+          {filtradas.map((reserva) => (
             <li key={reserva.id} className="tarjeta-item">
               <p className="reservas-disponibles__dia">{formatearDia(reserva.dia)}</p>
               <p className="reservas-disponibles__datos">
@@ -77,6 +97,7 @@ export default function ReservasDisponibles() {
               <p className="reservas-disponibles__datos">
                 ${Number(reserva.precio).toLocaleString("es-AR")}
               </p>
+              {reserva.capacidad && <p className="reservas-disponibles__cupo">{textoCupo(reserva)}</p>}
 
               <BotonSolicitud idReserva={reserva.id} idUsuario={usuario.id} />
             </li>

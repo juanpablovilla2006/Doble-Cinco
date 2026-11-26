@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useReservasDisponibles } from "../../hooks/useReservasDisponibles.js";
+import { textoCupo } from "../../utils/cupo.js";
 import { Link } from "react-router";
 import BarraMenu from "../../components/BarraMenu/BarraMenu.jsx";
 import CanchaItem from "../../components/CanchaItem/CanchaItem.jsx";
-import { listarCanchas } from "../../services/canchaService.js";
-import { listarReservasPublicas } from "../../services/reservaService.js";
 import { useUsuario } from "../../hooks/useUsuario.js";
 import BotonSolicitud from "../../components/BotonSolicitud/BotonSolicitud.jsx";
 import "./Inicio.css";
@@ -11,37 +10,16 @@ import "./Inicio.css";
 const CANTIDAD_RESERVAS = 3;
 const CANTIDAD_CANCHAS = 3;
 
-function esFutura(reserva) {
-  const ahora = new Date().toLocaleString("sv-SE", { timeZone: "America/Argentina/Buenos_Aires" });
-  const [dia, hora] = ahora.split(" ");
-  return reserva.dia > dia || (reserva.dia === dia && reserva.horario_inicio > hora);
-}
-
 function formatearDia(dia) {
   const [anio, mes, d] = dia.split("-");
   return `${d}/${mes}/${anio}`;
 }
 
 export default function Inicio() {
-  const [reservas, setReservas] = useState([]);
-  const [canchas, setCanchas] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
   const { usuario } = useUsuario();
-
-  useEffect(() => {
-    Promise.all([listarReservasPublicas(), listarCanchas()])
-      .then(([reservasPublicas, todasLasCanchas]) => {
-        setReservas(
-          reservasPublicas
-            .filter((r) => r.estado_reserva !== "cancelada" && esFutura(r))
-            .slice(0, CANTIDAD_RESERVAS)
-        );
-        setCanchas(todasLasCanchas.filter((c) => c.habilitada).slice(0, CANTIDAD_CANCHAS));
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setCargando(false));
-  }, []);
+  const { reservas: disponibles, canchas: todasLasCanchas, cargando, error } = useReservasDisponibles();
+  const reservas = disponibles.slice(0, CANTIDAD_RESERVAS);
+  const canchas = todasLasCanchas.filter((c) => c.habilitada).slice(0, CANTIDAD_CANCHAS);
 
   return (
     <>
@@ -65,7 +43,7 @@ export default function Inicio() {
                         <p className="inicio__fecha">
                           {formatearDia(r.dia)} · {r.horario_inicio.slice(0, 5)} a {r.horario_fin.slice(0, 5)}
                         </p>
-                        <p className="inicio__cancha">Cancha {r.numero_cancha}</p>
+                        <p className="inicio__cancha">Cancha {r.numero_cancha}{r.tipo && ` · ${r.tipo}`}</p>{r.capacidad && <p className="inicio__cupo">{textoCupo(r)}</p>}
                         <p className="inicio__precio">${r.precio}</p>
                         {usuario?.id !== r.id_creador && (
                           <BotonSolicitud idReserva={r.id} idUsuario={usuario?.id} />

@@ -45,3 +45,8 @@
 .inicio__vermas:hover {
   text-decoration: underline;
 }
+
+.inicio__cupo {
+  font-size: 0.85rem;
+  color: var(--tarjeta-texto-suave);
+}
