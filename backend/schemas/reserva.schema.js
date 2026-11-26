@@ -1,16 +1,17 @@
 import { z } from "zod";
-import { DURACION_MINIMA, MINUTOS_POR_PASO, esHorarioDeTurno, minutosEntre } from "../utils/horarios.js";
+import {DURACION_MINIMA,HORA_APERTURA,HORA_CIERRE,MINUTOS_POR_PASO,esHorarioDeTurno,estaDentroDelHorario,minutosEntre} from "../utils/horarios.js";
 
 // Valores posibles de reserva.estado_reserva (la columna es un varchar libre)
 export const ESTADOS_RESERVA = ["pendiente", "confirmada", "cancelada"];
 
 const fecha = z.iso.date("El día tiene que tener formato YYYY-MM-DD");
 
-// Acepta HH:MM o HH:MM:SS y lo normaliza a HH:MM:SS, así se puede comparar como string
+// Acepta HH:MM o HH:MM:SS y lo normaliza a HH:MM:SS, así se puede comparar como string.
+// Además de 00:00 a 23:59 acepta 24:00, que es la medianoche con la que cierra el complejo
 export const hora = z
   .string()
   .trim()
-  .regex(/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/, "El horario tiene que tener formato HH:MM")
+  .regex(/^(([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?|24:00(:00)?)$/, "El horario tiene que tener formato HH:MM")
   .transform((valor) => (valor.length === 5 ? `${valor}:00` : valor));
 
 const idPositivo = (nombre) =>
@@ -34,8 +35,14 @@ export function validarTurno(turno, ctx) {
 
   if (duracion <= 0) {
     ctx.addIssue({ code: "custom", message: "El horario de fin tiene que ser posterior al de inicio", path: ["horario_fin"] });
-  } else if (duracion < DURACION_MINIMA) {
+    } else if (duracion < DURACION_MINIMA) {
     ctx.addIssue({ code: "custom", message: "La reserva tiene que durar al menos 1 hora", path: ["horario_fin"] });
+    } else if (!estaDentroDelHorario(turno.horario_inicio, turno.horario_fin)) {
+    ctx.addIssue({
+      code: "custom",
+      message: `Solo se puede reservar de ${HORA_APERTURA} a ${HORA_CIERRE}`,
+      path: ["horario_inicio"]
+    });
   }
 }
 // Base sin refinamientos: en zod 4 no se puede hacer partial/omit sobre un schema refinado

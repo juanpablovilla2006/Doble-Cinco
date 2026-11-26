@@ -3,7 +3,7 @@ import * as reservaRepository from "../repositories/reserva.repository.js";
 import * as canchaRepository from "../repositories/cancha.repository.js";
 import * as usuarioRepository from "../repositories/usuario.repository.js";
 import { AppError } from "../errors/AppError.js";
-import { DURACION_MINIMA, minutosEntre } from "../utils/horarios.js";
+import { DURACION_MINIMA, HORA_APERTURA, HORA_CIERRE, estaDentroDelHorario, minutosEntre } from "../utils/horarios.js";
 
 export const DIAS_MAXIMOS_ANTICIPACION = 90;
 
@@ -124,6 +124,14 @@ export async function actualizar(id, datos) {
     minutosEntre(nueva.horario_inicio, nueva.horario_fin) < DURACION_MINIMA
   ) {
     throw new AppError(400, "La reserva tiene que durar al menos 1 hora");
+  }
+
+    // Si se toca el horario, la reserva que queda tiene que estar dentro del horario del complejo
+  if (
+    (datos.horario_inicio !== undefined || datos.horario_fin !== undefined) &&
+    !estaDentroDelHorario(nueva.horario_inicio, nueva.horario_fin)
+  ) {
+    throw new AppError(400, `Solo se puede reservar de ${HORA_APERTURA} a ${HORA_CIERRE}`);
   }
 
   // entra al if si se cambia el dia o la hora de inicio

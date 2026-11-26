@@ -13,8 +13,15 @@ function aTexto(minutos) {
   return `${horas}:${resto}`;
 }
 
-// 00:00, 00:15, 00:30 ... 23:45
-const HORARIOS = Array.from({ length: (24 * 60) / MINUTOS_POR_PASO }, (_, i) => aTexto(i * MINUTOS_POR_PASO));
+// Horario del complejo: de 08:00 a 24:00 (medianoche), igual que en el backend
+const HORA_APERTURA = "08:00";
+const HORA_CIERRE = "24:00";
+
+// 08:00, 08:15, 08:30 ... 23:45, 24:00
+const HORARIOS = Array.from(
+  { length: (aMinutos(HORA_CIERRE) - aMinutos(HORA_APERTURA)) / MINUTOS_POR_PASO + 1 },
+  (_, i) => aTexto(aMinutos(HORA_APERTURA) + i * MINUTOS_POR_PASO)
+);
 
 // Horarios de fin posibles para un inicio dado (al menos 1 hora después)
 export function horariosDeFin(inicio) {
