@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import * as usuarioRepository from "../repositories/usuario.repository.js";
 import { AppError } from "../errors/AppError.js";
+import { crearToken } from "../utils/token.js";
 
 const SALT_ROUNDS = 10;
 
@@ -45,8 +46,10 @@ export async function ingresar({ mail, password }) {
   if (!coincide) {
     throw new AppError(401, "Mail o contraseña incorrectos");
   }
-
-  return obtener(fila.id);
+  
+  // Devuelve los datos del usuario más el token que tiene que mandar en cada pedido
+  const usuario = await obtener(fila.id);
+  return { ...usuario, token: crearToken(usuario) };
 }
 
 export async function actualizar(id, datos) {

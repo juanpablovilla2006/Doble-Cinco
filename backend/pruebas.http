@@ -221,11 +221,55 @@ DELETE http://localhost:3000/reservas/1/mensajes/3?id_usuario=9
 POST http://localhost:3000/reservas
 Content-Type: application/json
 
-{"horario_inicio": "07:00",
+{"horario_inicio": "08:06",
 "numero_cancha": 5,
 "id_creador": 4,
 "dia": "2026-11-29",
-"horario_fin": "09:00"}
+"horario_fin": "09:15"}
 
 ###
 GET http://localhost:3000/reservas/21
+
+
+### ===== TOKEN (JWT) =====
+
+### 1. Login: tiene que devolver los datos del usuario + "token", sin "password"
+# @name login
+POST http://localhost:3000/usuarios/login
+Content-Type: application/json
+
+{
+  "mail": "admin@gmail.com",
+  "password": "12345678"
+}
+
+### 2. Yo, con el token del login (200 y tus datos)
+GET http://localhost:3000/usuarios/yo
+Authorization: Bearer {{login.response.body.token}}
+
+### 3. Yo, sin token (401 "Tenés que iniciar sesión")
+GET http://localhost:3000/usuarios/yo
+
+### 4. Yo, con un token inventado (401 "La sesión no es válida o venció...")
+GET http://localhost:3000/usuarios/yo
+Authorization: Bearer abc.def.ghi
+
+### 5. Yo, con el token real pero alterado (401): le agregué una "x" al final
+GET http://localhost:3000/usuarios/yo
+Authorization: Bearer {{login.response.body.token}}x
+
+### 6. Yo, sin la palabra Bearer (401)
+GET http://localhost:3000/usuarios/yo
+Authorization: {{login.response.body.token}}
+
+### 7. Login con contraseña incorrecta (401 "Mail o contraseña incorrectos", sin token)
+POST http://localhost:3000/usuarios/login
+Content-Type: application/json
+
+{
+  "mail": "TU_MAIL@ejemplo.com",
+  "password": "contraseña-mala"
+}
+
+### 8. Una ruta que todavía NO está protegida sigue andando sin token (200)
+GET http://localhost:3000/canchas
