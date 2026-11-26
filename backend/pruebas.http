@@ -216,3 +216,16 @@ DELETE http://localhost:3000/reservas/1/mensajes/3?id_usuario=2
 
 ### Un tercero intenta borrarlo (403)
 DELETE http://localhost:3000/reservas/1/mensajes/3?id_usuario=9
+
+###
+POST http://localhost:3000/reservas
+Content-Type: application/json
+
+{"horario_inicio": "07:00",
+"numero_cancha": 5,
+"id_creador": 4,
+"dia": "2026-11-29",
+"horario_fin": "09:00"}
+
+###
+GET http://localhost:3000/reservas/21

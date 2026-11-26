@@ -50,8 +50,8 @@ const reservaBase = z.object({
   numero_cancha: z.number().int().positive(),
   id_creador: z.number().int().positive(),
   dia: fecha,
-  horario_inicio: hora,
-  horario_fin: hora,
+  horario_inicio: horaDeTurno,
+  horario_fin: horaDeTurno,
   visibilidad: z.boolean(),
   estado_reserva: z.enum(ESTADOS_RESERVA),
   estado_pago: z.boolean()
